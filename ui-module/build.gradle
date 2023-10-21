@@ -1,0 +1,6 @@
+dependencies {
+    implementation project(':core-module')
+    implementation "org.seleniumhq.selenium:selenium-java:${seleniumVer}"
+    implementation "io.github.bonigarcia:webdrivermanager:${webdriverManagerVer}"
+    implementation "com.saucelabs:saucerest:${sauceRestVer}"
+}

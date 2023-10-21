@@ -1,0 +1,126 @@
+import java.nio.charset.StandardCharsets
+
+plugins {
+    id 'org.springframework.boot' version '2.7.4'
+    id 'io.spring.dependency-management' version '1.0.14.RELEASE'
+    id 'checkstyle'
+    id 'java'
+}
+
+group = 'com.reportportal'
+version = '0.0.1-SNAPSHOT'
+
+allprojects {
+    ext {
+        springBootVer = '3.1.0'
+        springFoxVer = "3.0.0"
+        seleniumVer = "4.8.1"
+        sauceRestVer = "2.0.2"
+        webdriverManagerVer = "5.5.3"
+        testngVer = "7.7.0"
+        reportportalTestNgVer = "5.1.3"
+        reportportalLogBackVer = "5.1.3"
+        feignVer = "1.4.7.RELEASE"
+        openFeignVer = "4.0.1"
+        feignJacksonVer = "12.2"
+        feignHttpClient5Ver = "12.3"
+        lombokVer = '1.18.26'
+        gsonVer = "2.10.1"
+        assertjVer = "3.24.2"
+        guavaVer = "31.1-jre"
+        vavrVer = "0.10.4"
+        httpclient5Ver = "5.2.1"
+        openCsvVer = "5.7.1"
+        ashotVer = "1.5.4"
+        diffMatchPatchVer = "1.2"
+        freemarkerVersion = "2.3.32"
+        jschVersion = "0.1.55"
+        rholderRetryingVer = "2.0.0"
+        testRailApiJavaVer = "2.0.2"
+        javaxVer = "2.0.1.Final"
+        modelMapperVer = "3.1.1"
+        apachcePoi = "5.2.3"
+    }
+
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'checkstyle'
+    apply plugin: 'java'
+
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://packages.atlassian.com/maven/repository/public"
+        }
+    }
+
+    checkstyle {
+        toolVersion = '10.9.1'
+        configFile = rootProject.file('checkstyle/checkstyle.xml')
+        showViolations = true
+        ignoreFailures = false
+    }
+
+    group 'com.reportportal'
+    version '1.0-SNAPSHOT'
+    java.sourceCompatibility = JavaVersion.VERSION_17
+    java.targetCompatibility = JavaVersion.VERSION_17
+
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+
+    dependencies {
+        implementation "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVer}"
+        implementation "org.springframework.boot:spring-boot-starter-web:${springBootVer}"
+        implementation "org.springframework.boot:spring-boot-starter-aop:${springBootVer}"
+        implementation "io.vavr:vavr:${vavrVer}"
+        implementation "com.github.rholder:guava-retrying:${rholderRetryingVer}"
+        implementation "com.github.rholder:guava-retrying:${rholderRetryingVer}"
+        implementation "org.modelmapper:modelmapper:${modelMapperVer}"
+        testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVer}"
+
+        compileOnly "org.projectlombok:lombok:${lombokVer}"
+        annotationProcessor "org.projectlombok:lombok:${lombokVer}"
+        testCompileOnly "org.projectlombok:lombok:${lombokVer}"
+        testAnnotationProcessor "org.projectlombok:lombok:${lombokVer}"
+        checkstyle "com.puppycrawl.tools:checkstyle:${checkstyle.toolVersion}"
+    }
+
+    task checkstyle(type: Checkstyle) {
+        source = 'src'
+        classpath = files()
+        reports {
+            xml.required = true
+            html.required = true
+            html.stylesheet resources.text.fromFile(rootProject.file('checkstyle/customCheckstyle.xsl'))
+        }
+    }
+
+    tasks.withType(JavaCompile).configureEach { task ->
+        if (Boolean.valueOf(System.getProperty("checkstyle.apply", "true"))) {
+            dependsOn('checkstyle')
+        }
+        task.options.encoding(StandardCharsets.UTF_8.name())
+        task.options.release.set(17)
+    }
+
+    jar {
+        enabled = true
+    }
+}
+
+project(':tests-module') {
+    tasks.named('test') {
+        systemProperties System.getProperties()
+        maxParallelForks = 1
+        useTestNG() {
+            options {
+                setParallel("classes")
+                setThreadCount(1)
+            }
+        }
+    }
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                %black(%d{ISO8601}) %highlight(%-5level) %blue(%C{1.}) [%yellow(thread-%.1t)]: %msg%n%throwable
+            </pattern>
+        </encoder>
+    </appender>
+    <appender name="RP" class="com.epam.reportportal.logback.appender.ReportPortalAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%t] %-5level - %msg%n</pattern>
+            <pattern>[thread-%.1t]: %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="binary_data_logger" level="TRACE" additivity="false">
+        <appender-ref ref="RP"/>
+    </logger>
+    <logger name="com.epam.reportportal.service" level="WARN"/>
+    <logger name="com.epam.reportportal.utils" level="WARN"/>
+    <logger name="org.springframework" level="ERROR"/>
+    <logger name="_org.springframework.web.servlet.HandlerMapping.Mappings" level="INFO"/>
+    <logger name="Validator" level="INFO" />
+    <logger name="springfox" level="ERROR"/>
+    <logger name="org.hibernate" level="ERROR"/>
+    <logger name="org.openqa.selenium" level="ERROR"/>
+    <logger name="org.asynchttpclient" level="ERROR"/>
+    <logger name="io.github.bonigarcia" level="ERROR"/>
+    <logger name="io.netty" level="ERROR"/>
+    <logger name="org.apache.commons.beanutils" level="ERROR"/>
+    <logger name="org.apache.hc" level="ERROR"/>
+
+    <root level="DEBUG">
+        <appender-ref ref="RP"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>

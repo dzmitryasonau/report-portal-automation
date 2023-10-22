@@ -82,6 +82,7 @@ public class CustomReportPortalListener extends BaseTestNGListener {
     @Override
     public void onConfigurationSuccess(ITestResult testResult) {
         //don't post any before/after TestNG methods
+
     }
 
     @Override

@@ -30,7 +30,7 @@ allprojects {
         guavaVer = "31.1-jre"
         vavrVer = "0.10.4"
         httpclient5Ver = "5.2.1"
-        openCsvVer = "5.7.1"
+        openCsvVer = "5.8"
         ashotVer = "1.5.4"
         diffMatchPatchVer = "1.2"
         freemarkerVersion = "2.3.32"

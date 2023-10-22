@@ -2,8 +2,6 @@ package com.reportportal.tests.api;
 
 import java.util.List;
 
-import com.epam.reportportal.annotations.attribute.AttributeValue;
-import com.epam.reportportal.annotations.attribute.Attributes;
 import com.reportportal.annotations.TmsId;
 import com.reportportal.core.AbstractWebTest;
 import com.reportportal.models.User;
@@ -15,7 +13,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-@Attributes(attributeValues = @AttributeValue("Test"))
 public class GetLaunchNamesWithFilterTests extends AbstractWebTest
 {
     private static final String PROJECT_NAME = "default_personal";

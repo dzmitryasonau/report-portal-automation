@@ -51,8 +51,8 @@ import org.testng.internal.TestResult;
 import org.testng.internal.collections.Pair;
 import org.testng.xml.XmlClass;
 
-import core.utils.SauceLabsTextNGCloudParameters;
-import core.utils.TestNgRpUtils;
+import com.reportportal.core.utils.SauceLabsTextNGCloudParameters;
+import com.reportportal.core.utils.TestNgRpUtils;
 import io.reactivex.Maybe;
 import io.vavr.control.Try;
 import ru.yandex.qatools.ashot.AShot;

@@ -10,9 +10,9 @@ import org.testng.annotations.Listeners;
 
 import com.reportportal.asserts.VerifyThat;
 import com.reportportal.config.SpringDomainConfig;
-import core.test_ng.CustomExecutionListener;
-import core.test_ng.CustomReportPortalListener;
-import core.utils.NotificationService;
+import com.reportportal.core.test_ng.CustomExecutionListener;
+import com.reportportal.core.test_ng.CustomReportPortalListener;
+import com.reportportal.core.utils.NotificationService;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 @ContextConfiguration(classes = {SpringDomainConfig.class})

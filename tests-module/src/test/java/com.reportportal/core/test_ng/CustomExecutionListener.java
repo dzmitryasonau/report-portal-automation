@@ -19,7 +19,7 @@ import org.testng.IMethodInterceptor;
 import org.testng.ITestContext;
 import org.testng.annotations.Test;
 
-import core.utils.TestNgRpUtils;
+import com.reportportal.core.utils.TestNgRpUtils;
 
 public class CustomExecutionListener implements IMethodInterceptor
 {

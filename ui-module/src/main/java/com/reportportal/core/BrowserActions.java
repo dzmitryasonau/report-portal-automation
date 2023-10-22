@@ -7,12 +7,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.reportportal.browser.WebDriverHolder;
 import com.reportportal.reporting.ReportService;
+import com.reportportal.utils.ObjectFormatUtils;
 
 @Component
 public class BrowserActions
@@ -57,6 +59,11 @@ public class BrowserActions
         return this;
     }
 
+    public BrowserActions waitUntilElementBeClickable(By locator) {
+        uiWait.until(ExpectedConditions.elementToBeClickable(locator), "Wait until the element **%s** be clickable", locator);
+        return this;
+    }
+
     public BrowserActions jsClick(By by)
     {
         reportService.debug("Perform JS click on the element by locator: **%s**", by);
@@ -68,6 +75,37 @@ public class BrowserActions
     public String getText(WebElement element)
     {
         return Objects.nonNull(element.getText()) ? element.getText().trim() : null;
+    }
+
+    public String getText(By by) {
+        return uiWait.until(wd -> {
+            WebElement element = wd.findElement(by);
+            elementHighlighter.highlight(element);
+            return getText(element);
+        }, "Get text from the element by locator: **%s**", by);
+    }
+
+    public BrowserActions inputText(By by, Object text) {
+        return inputText(by, text, false);
+    }
+
+    public BrowserActions inputText(By by, Object text, boolean isHideText) {
+        if (Objects.isNull(text)) {
+            reportService.debug("No text is typed into the element **%s**", by);
+            return this;
+        }
+        String textToLog = text.toString();
+        if (isHideText) {
+            textToLog = ObjectFormatUtils.replaceWithStar(textToLog);
+        }
+        uiWait.until(wd -> {
+            WebElement element = wd.findElement(by);
+            element.clear();
+            element.sendKeys(text.toString());
+            elementHighlighter.highlight(element);
+            return element;
+        }, "Type text *'%s'* into the element **%s**", textToLog, by);
+        return this;
     }
 
     public String getAttribute(By by, String attributeKey)

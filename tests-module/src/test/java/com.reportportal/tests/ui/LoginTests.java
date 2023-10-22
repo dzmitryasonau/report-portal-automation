@@ -1,14 +1,13 @@
-package com.reportportal.tests.api;
-
-import java.util.List;
+package com.reportportal.tests.ui;
 
 import com.epam.reportportal.annotations.attribute.AttributeValue;
 import com.epam.reportportal.annotations.attribute.Attributes;
 import com.reportportal.annotations.TmsId;
 import com.reportportal.core.AbstractWebTest;
 import com.reportportal.models.User;
+import com.reportportal.pages.LaunchesPage;
 import com.reportportal.services.UserDataService;
-import com.reportportal.steps.api.ApiSteps;
+import com.reportportal.steps.ui.LoginSteps;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.AfterMethod;
@@ -16,14 +15,14 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 @Attributes(attributeValues = @AttributeValue("test"))
-public class GetLaunchNamesWithFilterTests extends AbstractWebTest
+public class LoginTests extends AbstractWebTest
 {
-    private static final String PROJECT_NAME = "default_personal";
-    private static final String FILTER = "demo";
     @Autowired
-    private ApiSteps apiSteps;
+    private LoginSteps loginSteps;
     @Autowired
     private UserDataService userDataService;
+    @Autowired
+    private LaunchesPage launchesPage;
     private User user;
 
     @BeforeMethod
@@ -33,12 +32,12 @@ public class GetLaunchNamesWithFilterTests extends AbstractWebTest
     }
 
     @Test
-    @TmsId(20550)
-    public void getDefaultPersonalLaunchNamesWithDemoFilter()
+    @TmsId(20549)
+    public void loginToUI()
     {
         user = userDataService.getUser();
-        List<String> launches = apiSteps.getLaunchesByProjectName(user, PROJECT_NAME, FILTER);
-        verifyThat.actualIsEqualToExpected(launches, List.of("Demo Api Tests"), "Launches name are correct, ");
+        loginSteps.login(user);
+        verifyThat.actualIsEqualToExpected(launchesPage.getUserName().toLowerCase(), user.getLogin(), "User name is correct, ");
     }
 
     @AfterMethod

@@ -35,7 +35,7 @@ For running the tests you need to create the file the property file under the ne
 and define the next properties:
 
 ```
-browser.run.type=      -   (mandatory) parameter for defining WebDriver type. Supported local execution type and remote (SuaceLabs). Availible values are: LOCAL, REMOTE
+browser.run.type=      -   (mandatory) parameter for defining WebDriver type. Supported local execution type and remote (SauceLabs). Availible values are: LOCAL, REMOTE
 browser.accessKey=     -   (optional) access key parameter for SauceLabs. This applies only when browser.run.type=REMOTE
 browser.username=      -   (optional) username parameter for SauceLabs. This applies only when browser.run.type=REMOTE
 

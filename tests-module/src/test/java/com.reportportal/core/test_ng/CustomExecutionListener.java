@@ -60,7 +60,7 @@ public class CustomExecutionListener implements IMethodInterceptor
                     return !groups.contains(category);
                 }
             }
-            return true;
+            return false;
         });
 
         if (filteredMethods.isEmpty())

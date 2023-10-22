@@ -31,4 +31,4 @@ jobs:
         distribution: 'adopt'
 
     - name: Build with Gradle
-      run: ./gradlew clean build
+      run: ./gradlew :domain-module:build

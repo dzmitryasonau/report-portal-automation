@@ -31,4 +31,4 @@ jobs:
         distribution: 'adopt'
 
     - name: Build with Gradle
-      run: ${{ github.workspace }}/gradlew build
+      run: ./gradlew build

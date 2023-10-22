@@ -27,7 +27,7 @@ allprojects {
         lombokVer = '1.18.30'
         gsonVer = "2.10.1"
         assertjVer = "3.24.2"
-        guavaVer = "31.1-jre"
+        guavaVer = "32.1.3-jre"
         vavrVer = "0.10.4"
         httpclient5Ver = "5.2.1"
         openCsvVer = "5.8"

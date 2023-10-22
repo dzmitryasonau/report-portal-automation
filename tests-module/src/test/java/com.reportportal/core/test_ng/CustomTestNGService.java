@@ -27,7 +27,6 @@ import com.epam.ta.reportportal.ws.model.FinishTestItemRQ;
 import com.epam.ta.reportportal.ws.model.StartTestItemRQ;
 import com.epam.ta.reportportal.ws.model.attribute.ItemAttributesRQ;
 import com.epam.ta.reportportal.ws.model.issue.Issue;
-import com.epam.ta.reportportal.ws.model.launch.LaunchResource;
 import com.epam.ta.reportportal.ws.model.launch.Mode;
 import com.reportportal.browser.WebDriverHolder;
 import com.reportportal.config.SpringDomainConfig;
@@ -45,7 +44,6 @@ import org.testng.ISuite;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.internal.TestResult;
-import org.testng.internal.collections.Pair;
 import org.testng.xml.XmlClass;
 
 import io.reactivex.Maybe;
@@ -275,18 +273,6 @@ public class CustomTestNGService extends TestNGService
         StartTestItemRQ rq = super.buildStartSuiteRq(suite);
         rq.setName("report-portal");
         return rq;
-    }
-
-    public static Pair<LaunchResource, String> getRpLaunchUiData()
-    {
-        Launch launch = Launch.currentLaunch();
-        var parameters = launch.getParameters();
-        String url = parameters.getBaseUrl();
-        String modeType = parameters.getLaunchRunningMode() == Mode.DEBUG ? "userdebug" : "launches";
-        String project = parameters.getProjectName();
-        LaunchResource launchData = launch.getClient().getLaunchByUuid(launch.getLaunch().blockingGet()).blockingGet();
-        String launchUiUrl = String.format("%sui/#%s/%s/all/%s", url, project, modeType, launchData.getLaunchId());
-        return new Pair<>(launchData, launchUiUrl);
     }
 
     private <T> void appendData(StringBuilder sb, T[] array, String prefix, Function<T, String> func)

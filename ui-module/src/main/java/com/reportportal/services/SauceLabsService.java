@@ -5,6 +5,7 @@ import com.saucelabs.saucerest.SauceREST;
 import com.reportportal.support.properties.CustomPropertySourcesPlaceholderConfigurer;
 import io.vavr.control.Try;
 import org.openqa.selenium.remote.SessionId;
+import org.openqa.selenium.remote.AbstractDriverOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;

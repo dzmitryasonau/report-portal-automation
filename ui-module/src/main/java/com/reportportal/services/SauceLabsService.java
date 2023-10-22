@@ -48,6 +48,7 @@ public class SauceLabsService {
 
     public Try<Void> updateJobInfo(SessionId sessionId, Map<String, Object> jobInfo) {
         String sessionIdString = sessionId.toString();
+
         return Try.runRunnable(() -> getSauceRest().updateJobInfo(sessionIdString, jobInfo));
     }
 }

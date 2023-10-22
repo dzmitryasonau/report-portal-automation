@@ -4,5 +4,4 @@ include 'api-module'
 include 'ui-module'
 include 'tests-module'
 include 'domain-module'
-include 'tests-module'
 

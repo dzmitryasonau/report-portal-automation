@@ -5,6 +5,7 @@ import java.util.function.Supplier;
 import com.epam.reportportal.testng.BaseTestNGListener;
 import com.epam.reportportal.testng.ITestNGService;
 import com.epam.reportportal.utils.MemoizingSupplier;
+import com.epam.reportportal.utils.MimeTypeDetector;
 
 import org.testng.ISuite;
 import org.testng.ITestContext;
@@ -82,6 +83,7 @@ public class CustomReportPortalListener extends BaseTestNGListener {
     @Override
     public void onConfigurationSuccess(ITestResult testResult) {
         //don't post any before/after TestNG methods
+
     }
 
     @Override

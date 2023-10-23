@@ -20,7 +20,7 @@ allprojects {
         feignVer = "1.4.7.RELEASE"
         openFeignVer = "4.0.1"
         feignJacksonVer = "12.2"
-        feignHttpClient5Ver = "12.3"
+        feignHttpClient5Ver = "13.0"
         lombokVer = '1.18.30'
         gsonVer = "2.10.1"
         assertjVer = "3.24.2"

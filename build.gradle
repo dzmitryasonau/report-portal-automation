@@ -15,7 +15,7 @@ allprojects {
         sauceRestVer = "2.0.2"
         webdriverManagerVer = "5.5.3"
         testngVer = "7.7.0"
-        reportportalTestNgVer = "5.1.3"
+        reportportalTestNgVer = "5.3.1"
         reportportalLogBackVer = "5.1.3"
         feignVer = "1.4.7.RELEASE"
         openFeignVer = "4.0.1"

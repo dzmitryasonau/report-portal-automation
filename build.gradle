@@ -18,7 +18,7 @@ allprojects {
         reportportalTestNgVer = "5.1.3"
         reportportalLogBackVer = "5.1.3"
         feignVer = "1.4.7.RELEASE"
-        openFeignVer = "4.0.1"
+        openFeignVer = "4.0.4"
         feignJacksonVer = "12.2"
         feignHttpClient5Ver = "12.3"
         lombokVer = '1.18.30'

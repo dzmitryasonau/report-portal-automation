@@ -1,10 +1,14 @@
 package com.reportportal.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.epam.reportportal.annotations.Step;
 import com.reportportal.api_clients.ApiClient;
 import com.reportportal.core.FeignBaseClient;
+import com.reportportal.models.launch.Attribute;
+import com.reportportal.models.launch.Launch;
+import com.reportportal.models.launch.UpdateLaunchRequest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -38,5 +42,23 @@ public class ApiService
     public List<String> getLaunchesByProjectName(String authToken, String name, String filter)
     {
         return apiClient().getLaunchesByProjectName(authToken, name, filter).getBody();
+    }
+
+    @Step("User gets last launch")
+    public Launch getLastLaunchByProjectName(String authToken, String name)
+    {
+        return apiClient().getLatestLaunchByProjectName(authToken, name).getBody();
+    }
+
+    @Step("User gets launch status")
+    public Map<String, String> getLaunchStatus(String authToken, String name, Integer... id)
+    {
+        return apiClient().getLaunchStatus(authToken, name, id).getBody();
+    }
+
+    @Step("User update launch attributes")
+    public String updateLaunch(String authToken, String name, Integer launchId, List<Attribute> attributes)
+    {
+        return apiClient().updateLaunch(authToken, name, launchId, new UpdateLaunchRequest(attributes)).getBody();
     }
 }

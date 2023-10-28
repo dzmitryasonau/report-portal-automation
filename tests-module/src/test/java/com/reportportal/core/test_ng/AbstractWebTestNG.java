@@ -1,4 +1,4 @@
-package com.reportportal.core;
+package com.reportportal.core.test_ng;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.AfterMethod;
@@ -7,7 +7,8 @@ import org.testng.annotations.BeforeMethod;
 import com.reportportal.browser.WebDriverHolder;
 import com.reportportal.models.WebConfiguration;
 
-public abstract class AbstractWebTest extends AbstractTest {
+public abstract class AbstractWebTestNG extends AbstractTestNG
+{
 
     @Autowired
     private WebConfiguration webConfiguration;

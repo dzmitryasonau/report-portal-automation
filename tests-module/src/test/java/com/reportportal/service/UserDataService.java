@@ -1,4 +1,4 @@
-package com.reportportal.services;
+package com.reportportal.service;
 
 import java.io.FileReader;
 import java.io.IOException;

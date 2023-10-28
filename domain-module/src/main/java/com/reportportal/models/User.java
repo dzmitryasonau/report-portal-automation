@@ -9,9 +9,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class User extends BaseEntity {
+public class User extends BaseEntity
+{
     private String login;
     private String password;
     private String apiKey;
 
+    public User(String login, String password)
+    {
+        this.login = login;
+        this.password = password;
+    }
 }

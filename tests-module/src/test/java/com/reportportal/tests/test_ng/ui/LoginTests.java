@@ -1,12 +1,9 @@
-package com.reportportal.tests.ui;
+package com.reportportal.tests.test_ng.ui;
 
-import com.epam.reportportal.annotations.attribute.AttributeValue;
-import com.epam.reportportal.annotations.attribute.Attributes;
-import com.reportportal.annotations.TmsId;
-import com.reportportal.core.AbstractWebTest;
+import com.reportportal.core.test_ng.AbstractWebTestNG;
 import com.reportportal.models.User;
 import com.reportportal.pages.LaunchesPage;
-import com.reportportal.services.UserDataService;
+import com.reportportal.service.UserDataService;
 import com.reportportal.steps.ui.LoginSteps;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +11,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-@Attributes(attributeValues = @AttributeValue("test"))
-public class LoginTests extends AbstractWebTest
+public class LoginTests extends AbstractWebTestNG
 {
     @Autowired
     private LoginSteps loginSteps;
@@ -32,12 +28,12 @@ public class LoginTests extends AbstractWebTest
     }
 
     @Test
-    @TmsId(20549)
     public void loginToUI()
     {
         user = userDataService.getUser();
         loginSteps.login(user);
-        verifyThat.actualIsEqualToExpected(launchesPage.getUserName().toLowerCase(), user.getLogin(), "User name is correct, ");
+        verifyThat.actualIsEqualToExpected(launchesPage.getUserName().toLowerCase(), user.getLogin().toLowerCase(),
+                "User name is correct, ");
     }
 
     @AfterMethod

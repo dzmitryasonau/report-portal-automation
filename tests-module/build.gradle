@@ -11,8 +11,10 @@ dependencies {
     implementation "org.bitbucket.cowwoc:diff-match-patch:${diffMatchPatchVer}"
     implementation "com.jcraft:jsch:${jschVersion}"
     testImplementation "org.testng:testng:${testngVer}"
+    testImplementation "org.junit.jupiter:junit-jupiter:${junitVer}"
     testImplementation "ru.yandex.qatools.ashot:ashot:${ashotVer}"
     testRuntimeOnly "org.apache.httpcomponents.client5:httpclient5:${httpclient5Ver}"
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher"
     implementation "org.springframework.cloud:spring-cloud-starter-feign:${feignVer}"
     implementation "org.springframework.cloud:spring-cloud-starter-openfeign:${openFeignVer}"
     implementation("io.github.openfeign:feign-jackson:${feignJacksonVer}") {

@@ -2,13 +2,14 @@ package com.reportportal.service;
 
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.reportportal.models.Suites;
 
-public class SuitesDataReader
+public class SuitesDataReaderService
 {
     private static final String FILE_PATH =
             System.getProperty("user.dir") + "/domain-module/src/main/resources/test_data/json/launches_suites.json";
@@ -28,13 +29,7 @@ public class SuitesDataReader
 
     public List<String> getSuitesName(int id)
     {
-        for (Suites suit : suites)
-        {
-            if (suit.getId() == id)
-            {
-                return new ArrayList<>(suit.getSuitesName());
-            }
-        }
-        return new ArrayList<>();
+        return Arrays.stream(suites).filter(suit -> suit.getId() == id).map(Suites::getSuitesName).findFirst()
+                .orElse(Collections.emptyList());
     }
 }

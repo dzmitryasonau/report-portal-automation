@@ -1,23 +1,24 @@
-package com.reportportal.tests.test_ng.ui;
+package com.reportportal.tests.junit.ui;
 
 import java.util.List;
+import java.util.stream.Stream;
 
-import com.reportportal.core.test_ng.AbstractWebTestNG;
+import com.reportportal.core.junit.AbstractWebJUnit;
 import com.reportportal.models.User;
 import com.reportportal.pages.LaunchesPage;
 import com.reportportal.service.SuitesDataReaderService;
-import com.reportportal.service.TestNGDataProvider;
 import com.reportportal.service.UserDataService;
 import com.reportportal.steps.ui.LoginSteps;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
 
-public class LaunchTests extends AbstractWebTestNG
+public class LaunchTests extends AbstractWebJUnit
 {
     @Autowired
     private LoginSteps loginSteps;
@@ -29,13 +30,14 @@ public class LaunchTests extends AbstractWebTestNG
     private String projectName;
     private User user;
 
-    @BeforeMethod
-    private void setup()
+    @BeforeEach
+    public void setup()
     {
         user = userDataService.getUser();
     }
 
-    @Test(dataProvider = "suites", dataProviderClass = TestNGDataProvider.class)
+    @ParameterizedTest(name = "{index} => launchID={0}")
+    @MethodSource("getSuites")
     public void checkLaunches(Integer launchID)
     {
         loginSteps.login(user);
@@ -45,8 +47,14 @@ public class LaunchTests extends AbstractWebTestNG
         verifyThat.listOfPrimitivesAreEqual(suites, suitesReader.getSuitesName(launchID));
     }
 
-    @AfterMethod
-    private void tearDown()
+    private static Stream<Arguments> getSuites()
+    {
+        return Stream.of(Arguments.of(6262801), Arguments.of(6262802), Arguments.of(6262805), Arguments.of(6262804),
+                Arguments.of(6262805));
+    }
+
+    @AfterEach
+    public void tearDown()
     {
         userDataService.releaseUser(user);
     }

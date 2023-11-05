@@ -117,17 +117,17 @@ allprojects {
 
 project(':tests-module') {
     // JUnit configuration
-    tasks.named('test') {
-        systemProperties System.getProperties()
-        maxParallelForks = Runtime.getRuntime().availableProcessors()
-        maxHeapSize = '1G'
-        useJUnitPlatform()
-        testLogging {
-            showExceptions = true
-            exceptionFormat = TestExceptionFormat.FULL
-            events "passed"
-        }
-    }
+//    tasks.named('test') {
+//        systemProperties System.getProperties()
+//        maxParallelForks = Runtime.getRuntime().availableProcessors()
+//        maxHeapSize = '1G'
+//        useJUnitPlatform()
+//        testLogging {
+//            showExceptions = true
+//            exceptionFormat = TestExceptionFormat.FULL
+//            events "passed"
+//        }
+//    }
     //TestNG configuration
     tasks.named('test') {
         systemProperties System.getProperties()

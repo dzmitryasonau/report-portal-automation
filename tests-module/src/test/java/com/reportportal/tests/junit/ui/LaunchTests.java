@@ -5,10 +5,10 @@ import java.util.stream.Stream;
 
 import com.reportportal.core.junit.AbstractWebJUnit;
 import com.reportportal.models.User;
-import com.reportportal.pages.LaunchesPage;
 import com.reportportal.service.SuitesDataReaderService;
 import com.reportportal.service.UserDataService;
-import com.reportportal.steps.ui.LoginSteps;
+import com.reportportal.ui.pages.LaunchesPage;
+import com.reportportal.ui.steps.LoginSteps;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

@@ -3,13 +3,13 @@ package com.reportportal.tests.test_ng.api;
 import java.util.List;
 import java.util.Map;
 
+import com.reportportal.api.steps.ApiSteps;
 import com.reportportal.core.test_ng.AbstractTestNG;
 import com.reportportal.models.User;
 import com.reportportal.models.launch.Attribute;
 import com.reportportal.models.launch.Launch;
 import com.reportportal.service.TestNGDataProvider;
 import com.reportportal.service.UserDataService;
-import com.reportportal.steps.api.ApiSteps;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

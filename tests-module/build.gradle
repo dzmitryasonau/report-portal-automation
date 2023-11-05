@@ -1,8 +1,5 @@
 dependencies {
     implementation project(':core-module')
-    implementation project(':ui-module')
-    implementation project(':api-module')
-    implementation project(':domain-module')
     implementation "org.seleniumhq.selenium:selenium-java:${seleniumVer}"
     implementation "com.epam.reportportal:agent-java-testng:${reportportalTestNgVer}"
     implementation "com.epam.reportportal:logger-java-logback:${reportportalLogBackVer}"

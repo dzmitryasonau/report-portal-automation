@@ -2,9 +2,9 @@ package com.reportportal.tests.test_ng.ui;
 
 import com.reportportal.core.test_ng.AbstractWebTestNG;
 import com.reportportal.models.User;
-import com.reportportal.pages.LaunchesPage;
 import com.reportportal.service.UserDataService;
-import com.reportportal.steps.ui.LoginSteps;
+import com.reportportal.ui.pages.LaunchesPage;
+import com.reportportal.ui.steps.LoginSteps;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.AfterMethod;

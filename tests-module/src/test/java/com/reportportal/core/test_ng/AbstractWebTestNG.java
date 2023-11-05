@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-import com.reportportal.browser.WebDriverHolder;
-import com.reportportal.models.WebConfiguration;
+import com.reportportal.ui.browser.WebDriverHolder;
+import com.reportportal.ui.WebConfiguration;
 
 public abstract class AbstractWebTestNG extends AbstractTestNG
 {

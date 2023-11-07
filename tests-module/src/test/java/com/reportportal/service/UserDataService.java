@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserDataService
 {
-    private static final String MODULE_NAME = "/domain-module/src/main/resources/test_data/";
+    private static final String MODULE_NAME = "/core-module/src/main/resources/test_data/";
 
     private final ObjectMapper objectMapper = new ObjectMapper();
     private BlockingDeque<User> users;

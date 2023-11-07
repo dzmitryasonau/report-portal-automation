@@ -1,7 +1,7 @@
 package com.reportportal.core.junit;
 
-import com.reportportal.browser.WebDriverHolder;
-import com.reportportal.models.WebConfiguration;
+import com.reportportal.ui.browser.WebDriverHolder;
+import com.reportportal.ui.WebConfiguration;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

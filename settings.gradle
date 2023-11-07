@@ -1,7 +1,3 @@
 rootProject.name = 'report-portal-automation'
 include 'core-module'
-include 'api-module'
-include 'ui-module'
 include 'tests-module'
-include 'domain-module'
-

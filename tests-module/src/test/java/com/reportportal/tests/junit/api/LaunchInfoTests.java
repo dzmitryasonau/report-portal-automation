@@ -1,20 +1,19 @@
 package com.reportportal.tests.junit.api;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
+import com.reportportal.api.steps.ApiSteps;
 import com.reportportal.core.junit.AbstractJUnit;
 import com.reportportal.models.User;
 import com.reportportal.models.launch.Attribute;
 import com.reportportal.models.launch.Launch;
 import com.reportportal.service.UserDataService;
-import com.reportportal.steps.api.ApiSteps;
 import com.reportportal.utils.CommonUtils;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -63,7 +62,7 @@ public class LaunchInfoTests extends AbstractJUnit
     {
         Map<String, String> launch = apiSteps.getLaunchStatus(user, projectName, launchID);
 
-        assertEquals(launch.get(launchID.toString()), expectedStatus, "Launch status is correct, ");
+        Assertions.assertEquals(launch.get(launchID.toString()), expectedStatus, "Launch status is correct, ");
     }
 
     @ParameterizedTest
@@ -74,7 +73,7 @@ public class LaunchInfoTests extends AbstractJUnit
         String expectedResponse = String.format("{\"message\":\"Launch with ID = '%s' successfully updated.\"}",
                 launchID);
 
-        assertEquals(expectedResponse, response, "Response is not correct");
+        Assertions.assertEquals(expectedResponse, response, "Response is not correct");
     }
 
     private static Stream<Arguments> getLaunches()

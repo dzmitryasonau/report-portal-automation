@@ -4,17 +4,16 @@ import java.util.List;
 
 import com.reportportal.core.test_ng.AbstractWebTestNG;
 import com.reportportal.models.User;
-import com.reportportal.pages.LaunchesPage;
 import com.reportportal.service.SuitesDataReaderService;
 import com.reportportal.service.TestNGDataProvider;
 import com.reportportal.service.UserDataService;
-import com.reportportal.steps.ui.LoginSteps;
+import com.reportportal.ui.pages.LaunchesPage;
+import com.reportportal.ui.steps.LoginSteps;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class LaunchTests extends AbstractWebTestNG

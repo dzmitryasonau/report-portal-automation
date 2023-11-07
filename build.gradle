@@ -1,5 +1,4 @@
 import java.nio.charset.StandardCharsets
-import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 
 plugins {
     id 'org.springframework.boot' version '2.7.4'
@@ -14,7 +13,7 @@ allprojects {
         springFoxVer = "3.0.0"
         seleniumVer = "4.8.1"
         sauceRestVer = "2.0.2"
-        webdriverManagerVer = "5.5.3"
+        webdriverManagerVer = "5.6.1"
         testngVer = "7.7.0"
         junitVer = "5.9.2"
         reportportalTestNgVer = "5.3.1"
@@ -39,6 +38,9 @@ allprojects {
         javaxVer = "2.0.1.Final"
         modelMapperVer = "3.1.1"
         apachcePoi = "5.2.3"
+        cucumberVer = "7.14.0"
+        cucumberSpringVer = "7.14.0"
+        surefirePlugin = '3.0.0'
     }
 
     apply plugin: 'org.springframework.boot'
@@ -80,8 +82,11 @@ allprojects {
         implementation "com.github.rholder:guava-retrying:${rholderRetryingVer}"
         implementation "org.modelmapper:modelmapper:${modelMapperVer}"
         testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVer}"
-
+        testImplementation "io.cucumber:cucumber-java:${cucumberVer}"
+        testImplementation "io.cucumber:cucumber-testng:${cucumberVer}"
+        implementation "io.cucumber:cucumber-spring:${cucumberSpringVer}"
         compileOnly "org.projectlombok:lombok:${lombokVer}"
+        compileOnly "org.apache.maven.plugins:maven-surefire-plugin:${surefirePlugin}"
         annotationProcessor "org.projectlombok:lombok:${lombokVer}"
         testCompileOnly "org.projectlombok:lombok:${lombokVer}"
         testAnnotationProcessor "org.projectlombok:lombok:${lombokVer}"
@@ -116,28 +121,23 @@ allprojects {
 }
 
 project(':tests-module') {
-    // JUnit configuration
+    //TestNG configuration
 //    tasks.named('test') {
 //        systemProperties System.getProperties()
 //        maxParallelForks = Runtime.getRuntime().availableProcessors()
 //        maxHeapSize = '1G'
-//        useJUnitPlatform()
-//        testLogging {
-//            showExceptions = true
-//            exceptionFormat = TestExceptionFormat.FULL
-//            events "passed"
+//        useTestNG() {
+//            options {
+//                setParallel("classes")
+//                setThreadCount(5)
+//            }
 //        }
 //    }
-    //TestNG configuration
+
+    //TestNG cucumber parallel configuration
     tasks.named('test') {
-        systemProperties System.getProperties()
-        maxParallelForks = Runtime.getRuntime().availableProcessors()
-        maxHeapSize = '1G'
         useTestNG() {
-            options {
-                setParallel("classes")
-                setThreadCount(5)
-            }
+            suiteXmlFiles = files('/src/test/resources/testng.xml').toList()
         }
     }
 }

@@ -32,7 +32,8 @@ public class LoginTests extends AbstractWebTestNG
     {
         user = userDataService.getUser();
         loginSteps.login(user);
-        verifyThat.actualIsEqualToExpected(launchesPage.getUserName().toLowerCase(), user.getLogin().toLowerCase(),
+        verifyThat.actualIsEqualToExpected(launchesPage.openUserBlock().getUserName().toLowerCase(),
+                user.getLogin().toLowerCase(),
                 "User name is correct, ");
     }
 

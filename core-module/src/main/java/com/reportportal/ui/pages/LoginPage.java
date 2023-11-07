@@ -14,12 +14,19 @@ public class LoginPage extends AbstractPage
     private final By login = By.xpath("//input[@name='login']");
     private final By password = By.xpath("//input[@name='password']");
     private final By loginButton = By.xpath("//button[@type='submit' and text()='Login']");
+    private final By errorNotification = By.xpath("//div[contains(@class,'notificationItem__error')]/p");
 
     @Loggable("User fills login")
     public LoginPage fillLogin(String userLogin)
     {
         browserActions.inputText(login, userLogin);
         return this;
+    }
+
+    @Loggable("User checks error notification presence")
+    public Boolean isErrorMessagePresent()
+    {
+        return browserActions.waitUntilElementBeVisible(errorNotification).isDisplayed(errorNotification);
     }
 
     @Loggable("User fills password")

@@ -37,7 +37,7 @@ allprojects {
         testRailApiJavaVer = "2.0.2"
         javaxVer = "2.0.1.Final"
         modelMapperVer = "3.1.1"
-        apachcePoi = "5.2.3"
+        apachcePoi = "5.2.4"
         cucumberVer = "7.14.0"
         cucumberSpringVer = "7.14.0"
         surefirePlugin = '3.0.0'

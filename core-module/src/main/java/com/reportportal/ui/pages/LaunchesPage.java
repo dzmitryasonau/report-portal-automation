@@ -23,9 +23,16 @@ public class LaunchesPage extends AbstractPage
     @Loggable("User gets username")
     public String getUserName()
     {
-        browserActions.jsClick(openUserBlock);
         return browserActions.getText(username);
     }
+
+    @Loggable("User opens userblock")
+    public LaunchesPage openUserBlock()
+    {
+        browserActions.jsClick(openUserBlock);
+        return this;
+    }
+
 
     @Loggable("User opens launch")
     public LaunchPage openLaunch(String launchID)

@@ -1,12 +1,12 @@
 package com.reportportal.ui.browser.strategy;
 
+import com.reportportal.ui.WebConfiguration;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.remote.AbstractDriverOptions;
 
 import io.github.bonigarcia.wdm.config.DriverManagerType;
-import com.reportportal.ui.WebConfiguration;
 
 public class FirefoxStrategy extends AbstractDriverStrategy
 {
@@ -22,12 +22,6 @@ public class FirefoxStrategy extends AbstractDriverStrategy
         FirefoxDriver driver = new FirefoxDriver(new FirefoxOptions());
         driver.manage().window().maximize();
         return driver;
-    }
-
-    @Override
-    protected AbstractDriverOptions<?> getSpecificRemoteDriverOptions()
-    {
-        return new FirefoxOptions();
     }
 
     @Override

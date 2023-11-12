@@ -64,6 +64,16 @@ public class BrowserActions
         return this;
     }
 
+    public BrowserActions waitUntilElementBeVisible(By locator) {
+        uiWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator), "Wait until the element **%s** be visible", locator);
+        return this;
+    }
+
+    public boolean isDisplayed(By by) {
+        return uiWait.until(wd -> wd.findElement(by).isDisplayed(), "The element by locator **%s** is displayed", by);
+    }
+
+
     public BrowserActions jsClick(By by)
     {
         reportService.debug("Perform JS click on the element by locator: **%s**", by);

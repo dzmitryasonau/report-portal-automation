@@ -36,7 +36,7 @@ allprojects {
         rholderRetryingVer = "2.0.0"
         testRailApiJavaVer = "2.0.2"
         javaxVer = "2.0.1.Final"
-        modelMapperVer = "3.1.1"
+        modelMapperVer = "3.2.0"
         apachcePoi = "5.2.3"
         cucumberVer = "7.14.0"
         cucumberSpringVer = "7.14.0"

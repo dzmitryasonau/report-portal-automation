@@ -20,7 +20,7 @@ allprojects {
         reportportalLogBackVer = "5.1.6"
         feignVer = "1.4.7.RELEASE"
         openFeignVer = "4.0.4"
-        feignJacksonVer = "12.2"
+        feignJacksonVer = "13.1"
         feignHttpClient5Ver = "13.0"
         lombokVer = '1.18.30'
         gsonVer = "2.10.1"

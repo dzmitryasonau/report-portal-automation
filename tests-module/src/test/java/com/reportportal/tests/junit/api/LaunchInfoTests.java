@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 import com.reportportal.api.steps.ApiSteps;
 import com.reportportal.core.junit.AbstractJUnit;
 import com.reportportal.models.User;
-import com.reportportal.models.launch.Attribute;
+import com.reportportal.models.launch.api.Attribute;
 import com.reportportal.models.launch.Launch;
 import com.reportportal.service.UserDataService;
 import com.reportportal.utils.CommonUtils;

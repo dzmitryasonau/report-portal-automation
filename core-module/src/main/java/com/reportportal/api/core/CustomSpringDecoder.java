@@ -76,11 +76,6 @@ public class CustomSpringDecoder implements Decoder {
         }
 
         @Override
-        public int getRawStatusCode() {
-            return response.status();
-        }
-
-        @Override
         public String getStatusText() {
             return response.reason();
         }

@@ -14,6 +14,7 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 import com.reportportal.exceptions.AutomationException;
+import com.reportportal.models.User;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -56,5 +57,10 @@ public class AesCryptoService
         {
             throw new AutomationException("Unable to decode string", decodedString);
         }
+    }
+
+    public String getDecryptedBearerApiKey(User user)
+    {
+        return "Bearer " + decrypt(user.getApiKey());
     }
 }

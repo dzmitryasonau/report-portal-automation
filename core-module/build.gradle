@@ -20,6 +20,8 @@ dependencies {
     testImplementation "ru.yandex.qatools.ashot:ashot:${ashotVer}"
     testImplementation "io.cucumber:cucumber-java:${cucumberVer}"
     testImplementation "io.cucumber:cucumber-testng:${cucumberVer}"
+    implementation "io.rest-assured:rest-assured:${restAssuredVer}"
     testRuntimeOnly "org.apache.httpcomponents.client5:httpclient5:${httpclient5Ver}"
     implementation "io.github.bonigarcia:webdrivermanager:${webdriverManagerVer}"
+    implementation "org.apache.httpcomponents.client5:httpclient5:${httpclient5Ver}"
 }

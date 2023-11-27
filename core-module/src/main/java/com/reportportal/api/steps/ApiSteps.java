@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.epam.reportportal.annotations.Step;
 import com.reportportal.models.User;
-import com.reportportal.models.launch.Attribute;
+import com.reportportal.models.launch.api.Attribute;
 import com.reportportal.models.launch.Launch;
 import com.reportportal.service.AesCryptoService;
 import com.reportportal.service.ApiService;

@@ -1,4 +1,4 @@
-package com.reportportal.models.launch;
+package com.reportportal.models.launch.api;
 
 import lombok.Data;
 

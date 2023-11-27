@@ -3,7 +3,7 @@
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>
-                %black(%d{ISO8601}) %highlight(%-5level) %blue(%C{1.}) [%yellow(thread-%.1t)]: %msg%n%throwable
+                %black(%d{ISO8601}) %highlight(%-5level) %blue(%C{1}) [%yellow(thread-%.1t)]: %msg%n%throwable
             </pattern>
         </encoder>
     </appender>

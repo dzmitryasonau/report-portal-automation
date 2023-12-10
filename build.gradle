@@ -11,7 +11,8 @@ allprojects {
     ext {
         springBootVer = "3.1.5"
         springFoxVer = "3.0.0"
-        seleniumVer = "4.8.1"
+        seleniumVer = "4.16.1"
+        seleniumHttpJdkVer = "4.13.0"
         sauceRestVer = "2.0.2"
         webdriverManagerVer = "5.6.1"
         testngVer = "7.7.0"
@@ -34,14 +35,16 @@ allprojects {
         freemarkerVersion = "2.3.32"
         jschVersion = "0.1.55"
         rholderRetryingVer = "2.0.0"
-        testRailApiJavaVer = "2.0.2"
         javaxVer = "2.0.1.Final"
         modelMapperVer = "3.2.0"
         apachcePoi = "5.2.4"
         cucumberVer = "7.14.0"
         cucumberSpringVer = "7.14.0"
-        surefirePlugin = "3.0.0"
-        restAssuredVer='5.3.2'
+        surefirePlugin = '3.0.0'
+        selenideVersion = "7.0.3"
+        allureSelenideVersion = "2.24.0"
+        reportPortalLoggerVer = "5.1.4"
+        restAssuredVer="5.3.2"
         httpclient5Ver="5.2.1"
     }
 
@@ -83,6 +86,16 @@ allprojects {
         implementation "com.github.rholder:guava-retrying:${rholderRetryingVer}"
         implementation "com.github.rholder:guava-retrying:${rholderRetryingVer}"
         implementation "org.modelmapper:modelmapper:${modelMapperVer}"
+        implementation "org.seleniumhq.selenium:selenium-http-jdk-client:${seleniumHttpJdkVer}"
+        implementation "org.seleniumhq.selenium:selenium-remote-driver:${seleniumVer}"
+        implementation "org.seleniumhq.selenium:selenium-chrome-driver:${seleniumVer}"
+        implementation "org.seleniumhq.selenium:selenium-firefox-driver:${seleniumVer}"
+        implementation "org.seleniumhq.selenium:selenium-safari-driver:${seleniumVer}"
+        implementation "org.seleniumhq.selenium:selenium-ie-driver:${seleniumVer}"
+        implementation "org.seleniumhq.selenium:selenium-support:${seleniumVer}"
+        implementation "org.seleniumhq.selenium:selenium-api:${seleniumVer}"
+        implementation "org.seleniumhq.selenium:selenium-support:${seleniumVer}"
+        implementation "io.qameta.allure:allure-selenide:${allureSelenideVersion}"
         testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVer}"
         testImplementation "io.cucumber:cucumber-java:${cucumberVer}"
         testImplementation "io.cucumber:cucumber-testng:${cucumberVer}"
@@ -91,9 +104,11 @@ allprojects {
         compileOnly "org.apache.maven.plugins:maven-surefire-plugin:${surefirePlugin}"
         annotationProcessor "org.projectlombok:lombok:${lombokVer}"
         testCompileOnly "org.projectlombok:lombok:${lombokVer}"
+        testImplementation "com.epam.reportportal:logger-java-selenide:${reportPortalLoggerVer}"
         testAnnotationProcessor "org.projectlombok:lombok:${lombokVer}"
         checkstyle "com.puppycrawl.tools:checkstyle:${checkstyle.toolVersion}"
         implementation "io.rest-assured:rest-assured:${restAssuredVer}"
+        implementation "io.rest-assured:xml-path:${restAssuredVer}"
         implementation "org.apache.httpcomponents.client5:httpclient5:${httpclient5Ver}"
     }
 
@@ -131,6 +146,8 @@ project(':tests-module') {
         maxParallelForks = Runtime.getRuntime().availableProcessors()
         maxHeapSize = '1G'
         useTestNG() {
+            //listeners << 'com.reportportal.core.test_ng.SeleniumScreenShotOnFailListener'
+            listeners << 'com.reportportal.core.test_ng.SelenideScreenShotOnFailListener'
             options {
                 setParallel("classes")
                 setThreadCount(5)

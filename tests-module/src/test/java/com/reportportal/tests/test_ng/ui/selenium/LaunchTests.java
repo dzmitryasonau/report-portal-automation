@@ -1,4 +1,4 @@
-package com.reportportal.tests.test_ng.ui;
+package com.reportportal.tests.test_ng.ui.selenium;
 
 import java.util.List;
 

@@ -34,6 +34,14 @@ public class VerifyThat
         return this;
     }
 
+    public <T> VerifyThat itemIsNotPresentInList(T expected, List<T> actual, String message) {
+        decorateLogForList(expected, actual);
+        ThreadLocal<SoftAssertions> softAssertions = ThreadLocal.withInitial(SoftAssertions::new);
+        softAssertions.get().assertThat(actual).as(message).doesNotContain(expected);
+        softAssertions.get().assertAll();
+        return this;
+    }
+
     public <T> VerifyThat actualIsContainExpected(T expected, T actual, String startMessage)
     {
         ThreadLocal<SoftAssertions> softAssertions = ThreadLocal.withInitial(SoftAssertions::new);

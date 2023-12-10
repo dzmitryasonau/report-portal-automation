@@ -3,6 +3,7 @@ package com.reportportal.config;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.reportportal.api.HttpClientConfig;
 import com.reportportal.api.SpringApiConfig;
 import com.reportportal.support.CustomPropertySourcesPlaceholderConfigurer;
 import com.reportportal.support.PropertyHandlerHolder;
@@ -19,7 +20,7 @@ import org.springframework.core.io.Resource;
 @Configuration
 @ComponentScan({ "com.reportportal" })
 @EnableAspectJAutoProxy(proxyTargetClass = true)
-@Import({ SpringUiConfig.class, SpringApiConfig.class, SpringCoreConfig.class })
+@Import({ SpringUiConfig.class, SpringApiConfig.class, HttpClientConfig.class, SpringCoreConfig.class })
 public class SpringDomainConfig
 {
 

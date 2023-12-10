@@ -6,9 +6,9 @@ import java.util.Map;
 import com.epam.reportportal.annotations.Step;
 import com.reportportal.api.ApiClient;
 import com.reportportal.api.core.FeignBaseClient;
-import com.reportportal.models.launch.Attribute;
+import com.reportportal.models.launch.api.Attribute;
 import com.reportportal.models.launch.Launch;
-import com.reportportal.models.launch.UpdateLaunchRequest;
+import com.reportportal.models.launch.api.UpdateLaunchRequest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

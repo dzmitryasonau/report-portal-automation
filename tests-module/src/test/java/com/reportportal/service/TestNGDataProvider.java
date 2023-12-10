@@ -2,7 +2,7 @@ package com.reportportal.service;
 
 import java.util.List;
 
-import com.reportportal.models.launch.Attribute;
+import com.reportportal.models.launch.api.Attribute;
 import com.reportportal.utils.CommonUtils;
 
 import org.testng.annotations.DataProvider;

@@ -9,13 +9,13 @@ import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.function.Predicate;
 
-import javax.annotation.PostConstruct;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.reportportal.exceptions.AutomationException;
 import com.reportportal.models.User;
 
 import org.springframework.stereotype.Service;
+
+import jakarta.annotation.PostConstruct;
 
 @Service
 public class UserDataService
@@ -42,11 +42,13 @@ public class UserDataService
         }
     }
 
-    public User getUser() {
+    public User getUser()
+    {
         return getUserByCondition(user -> true);
     }
 
-    public User getUserByLogin(String userLogin) {
+    public User getUserByLogin(String userLogin)
+    {
         return getUserByCondition(user -> user.getLogin().equals(userLogin));
     }
 
@@ -59,21 +61,28 @@ public class UserDataService
         users.addLast(user);
     }
 
-    private User getUserByCondition(Predicate<User> condition) {
+    private User getUserByCondition(Predicate<User> condition)
+    {
         User user = null;
         List<User> tempList = new ArrayList<>();
 
-        try {
-            while (user == null) {
-                synchronized (this.users) {
+        try
+        {
+            while (user == null)
+            {
+                synchronized (this.users)
+                {
                     User tempUser;
-                    while ((tempUser = users.poll()) != null) {
-                        if (condition.test(tempUser)) {
+                    while ((tempUser = users.poll()) != null)
+                    {
+                        if (condition.test(tempUser))
+                        {
                             user = tempUser;
                         }
                         tempList.add(tempUser);
 
-                        if (user != null) {
+                        if (user != null)
+                        {
                             break;
                         }
                     }
@@ -81,16 +90,22 @@ public class UserDataService
                     tempList.clear();
                 }
 
-                if (user == null) {
-                    try {
+                if (user == null)
+                {
+                    try
+                    {
                         Thread.sleep(WAIT_AVAILABLE_USER);
-                    } catch (InterruptedException e) {
+                    }
+                    catch (InterruptedException e)
+                    {
                         Thread.currentThread().interrupt();
                         throw new AutomationException("Interrupted while waiting for a user to be free", e);
                     }
                 }
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             Thread.currentThread().interrupt();
             throw new AutomationException("Error while getting user", e);
         }

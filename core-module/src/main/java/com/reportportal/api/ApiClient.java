@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.reportportal.models.launch.Launch;
-import com.reportportal.models.launch.UpdateLaunchRequest;
+import com.reportportal.models.launch.api.UpdateLaunchRequest;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

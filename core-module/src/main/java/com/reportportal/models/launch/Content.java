@@ -2,6 +2,8 @@ package com.reportportal.models.launch;
 
 import java.util.List;
 
+import com.reportportal.models.launch.api.Attribute;
+
 import lombok.Data;
 
 @Data

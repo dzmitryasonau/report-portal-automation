@@ -8,7 +8,7 @@ import java.util.Map;
 import com.reportportal.api.steps.ApiSteps;
 import com.reportportal.asserts.VerifyThat;
 import com.reportportal.models.User;
-import com.reportportal.models.launch.Attribute;
+import com.reportportal.models.launch.api.Attribute;
 import com.reportportal.ui.components.GlobalVariablesService;
 import com.reportportal.utils.CommonUtils;
 

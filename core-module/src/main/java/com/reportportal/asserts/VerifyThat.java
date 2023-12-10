@@ -1,6 +1,7 @@
 package com.reportportal.asserts;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.reportportal.reporting.ReportService;
 
@@ -21,6 +22,14 @@ public class VerifyThat
         String message = startMessage + String.format(" expected: '%s' found: '%s'", expected, actual);
         reportService.info(message);
         softAssertions.get().assertThat(actual).as(message).isEqualTo(expected);
+        softAssertions.get().assertAll();
+        return this;
+    }
+
+    public <T> VerifyThat itemIsPresentInList(T expected, List<T> actual, String message) {
+        decorateLogForList(expected, actual);
+        ThreadLocal<SoftAssertions> softAssertions = ThreadLocal.withInitial(SoftAssertions::new);
+        softAssertions.get().assertThat(actual).as(message).contains(expected);
         softAssertions.get().assertAll();
         return this;
     }
@@ -51,5 +60,10 @@ public class VerifyThat
         ThreadLocal<SoftAssertions> softAssertions = ThreadLocal.withInitial(SoftAssertions::new);
         softAssertions.get().assertThat(expected).as(message).isTrue();
         return this;
+    }
+
+    private <T> void decorateLogForList(T expected, List<T> actual) {
+        reportService.info("Verify that 'EXPECTED' object is present in list: %s", expected.toString());
+        reportService.info("Actual data in the list: %s", actual.stream().map(Object::toString).collect(Collectors.joining(", ")));
     }
 }

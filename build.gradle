@@ -9,7 +9,7 @@ plugins {
 
 allprojects {
     ext {
-        springBootVer = "3.1.5"
+        springBootVer = "3.2.0"
         springFoxVer = "3.0.0"
         seleniumVer = "4.8.1"
         sauceRestVer = "2.0.2"

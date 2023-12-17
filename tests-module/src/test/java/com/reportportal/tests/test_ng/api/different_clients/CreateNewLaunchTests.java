@@ -20,7 +20,7 @@ import org.testng.annotations.Test;
 
 public class CreateNewLaunchTests extends AbstractTestNG
 {
-    private static final String LAUNCH_NAME = "Demo Api Tests";
+    private static final String LAUNCH_NAME = "Demo_Api_Tests";
     private static final Integer LAST_LAUNCH_ID = 6262805;
     @Autowired
     private UserDataService userDataService;

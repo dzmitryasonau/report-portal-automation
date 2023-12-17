@@ -26,7 +26,7 @@ import org.testng.annotations.Test;
 
 public class ForceLaunchTests extends AbstractTestNG
 {
-    private static final String LAUNCH_NAME = "Demo Api Tests";
+    private static final String LAUNCH_NAME = "Demo_Api_Tests";
     @Autowired
     private UserDataService userDataService;
     @Autowired

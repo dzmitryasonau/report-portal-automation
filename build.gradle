@@ -40,7 +40,7 @@ allprojects {
         apachcePoi = "5.2.4"
         cucumberVer = "7.14.0"
         cucumberSpringVer = "7.14.0"
-        surefirePlugin = '3.0.0'
+        surefirePlugin = "3.2.3"
         selenideVersion = "7.0.3"
         allureSelenideVersion = "2.24.0"
         reportPortalLoggerVer = "5.1.4"

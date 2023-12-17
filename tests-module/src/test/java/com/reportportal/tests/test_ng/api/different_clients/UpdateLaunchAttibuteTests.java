@@ -63,7 +63,7 @@ public class UpdateLaunchAttibuteTests extends AbstractTestNG
     @Test
     public void checkAttributeUpdateInvalidProject()
     {
-        projectName = "Invalid project name";
+        projectName = "Invalid_project_name";
         CustomResponse response = httpClient.updateLaunchAttributes(token, projectName, LAST_LAUNCH_ID,
                 List.of(new Attribute(ATTRIBUTE_PREFIX + CommonUtils.getRandomInteger(MAX_INDEX), ATTRIBUTE_VALUE)));
 

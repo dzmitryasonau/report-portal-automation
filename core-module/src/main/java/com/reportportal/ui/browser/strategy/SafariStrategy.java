@@ -17,7 +17,7 @@ public class SafariStrategy extends AbstractDriverStrategy
     }
 
     @Override
-    protected WebDriver getLocalDriverInstance()
+    protected WebDriver getLocalDriverInstance(Boolean isHeadless)
     {
         SafariDriver driver = new SafariDriver(new SafariOptions());
         driver.manage().window().maximize();

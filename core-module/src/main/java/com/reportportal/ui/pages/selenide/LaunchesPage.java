@@ -1,5 +1,6 @@
 package com.reportportal.ui.pages.selenide;
 
+import java.time.Duration;
 import java.util.List;
 
 import com.codeborne.selenide.CollectionCondition;
@@ -74,7 +75,7 @@ public class LaunchesPage extends AbstractSelenidePage
 
     public void waitUntilSuccessfullyLoginBannerDisappear()
     {
-        successfullyLoginBanner.should(Condition.disappear);
+        successfullyLoginBanner.should(Condition.disappear, Duration.ofSeconds(10));
     }
 
     public String getUserName()

@@ -53,7 +53,7 @@ public class CreateNewLaunchTests extends AbstractTestNG
     @Test
     public void checkStartNewLaunchIncorrectLaunchName()
     {
-        String launchName = "Incorrect launch name";
+        String launchName = "Incorrect/\n launch name";
         CustomResponse response = httpClient.postNewLaunch(token, projectName,
                 new StartLaunchRequest(launchName, ZonedDateTime.now()
                         .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").withZone(ZoneOffset.UTC))));

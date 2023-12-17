@@ -38,6 +38,6 @@ public class TestNGDataProvider
     public static Object[][] getLaunches()
     {
         return new Object[][] { { 6262801, "FAILED" }, { 6262802, "FAILED" }, { 6262803, "FAILED" },
-                { 6262804, "FAILED" }, { 6262805, "PASSED" } };
+                { 6262804, "FAILED" }, { 6262805, "INTERRUPTED" } };
     }
 }

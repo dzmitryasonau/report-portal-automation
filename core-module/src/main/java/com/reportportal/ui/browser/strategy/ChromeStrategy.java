@@ -8,26 +8,25 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import io.github.bonigarcia.wdm.config.DriverManagerType;
 
-public class ChromeStrategy extends AbstractDriverStrategy
-{
+public class ChromeStrategy extends AbstractDriverStrategy {
 
-    public ChromeStrategy(WebConfiguration webConfiguration)
-    {
+    public ChromeStrategy(WebConfiguration webConfiguration) {
         super(webConfiguration);
     }
 
     @Override
-    protected WebDriver getLocalDriverInstance()
-    {
+    protected WebDriver getLocalDriverInstance(Boolean isHeadless) {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
         options.addArguments("--remote-allow-origins=*");
+        if (isHeadless) {
+            options.addArguments("--headless");
+        }
         return new ChromeDriver(options);
     }
 
     @Override
-    protected DriverManagerType getDriverManagerType()
-    {
+    protected DriverManagerType getDriverManagerType() {
         return DriverManagerType.CHROME;
     }
 }

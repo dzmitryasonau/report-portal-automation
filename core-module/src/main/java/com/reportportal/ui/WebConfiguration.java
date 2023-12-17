@@ -22,6 +22,8 @@ public class WebConfiguration extends BaseEntity
 {
     @Value("${browser.name}")
     private String browserName;
+    @Value("${browser.headless}")
+    private String headless;
     @Value("${browser.run.type}")
     private RunType runType;
     @Value("${browser.version}")

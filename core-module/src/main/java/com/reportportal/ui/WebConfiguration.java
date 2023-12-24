@@ -1,18 +1,15 @@
 package com.reportportal.ui;
 
-import java.util.Map;
-
-import javax.annotation.PostConstruct;
-
 import com.reportportal.meta.BaseEntity;
 import com.reportportal.meta.RunType;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+import java.util.Map;
 
 @Component
 @Getter
@@ -28,8 +25,6 @@ public class WebConfiguration extends BaseEntity
     private RunType runType;
     @Value("${browser.version}")
     private String browserVersion;
-    @Value("${browser.remote.url}")
-    private String remoteUrl;
     @Value("${browser.username}")
     private String username;
     @Value("${browser.accessKey}")

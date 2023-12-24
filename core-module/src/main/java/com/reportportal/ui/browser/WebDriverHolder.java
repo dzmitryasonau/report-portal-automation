@@ -21,7 +21,7 @@ import java.util.Objects;
 public final class WebDriverHolder {
 
     private static final ThreadLocal<WebDriver> webDriver = new InheritableThreadLocal<>();
-    private static final  ThreadLocal<FluentWait<WebDriver>> webDriverWait = new InheritableThreadLocal<>();
+    private static final ThreadLocal<FluentWait<WebDriver>> webDriverWait = new InheritableThreadLocal<>();
     private static WebDriverHolder instance;
     private WebConfiguration webConfiguration;
 

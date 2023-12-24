@@ -16,8 +16,6 @@ import com.reportportal.core.test_ng.CustomTestNGService;
 import com.reportportal.exceptions.AutomationException;
 import com.reportportal.reporting.ReportService;
 import com.reportportal.reporting.TestRailService;
-import com.reportportal.service.models.TestMethodContext;
-import com.reportportal.service.models.TestRunContext;
 import com.reportportal.support.PropertyHandlerHolder;
 import io.vavr.control.Try;
 import org.testng.ITestContext;
@@ -94,14 +92,13 @@ public class NotificationService {
 
         testCaseData.forEach((tmsId, testNgMethod) ->
         {
-            TestRunContext runContext = new TestRunContext(testRail, testRun, context, resultsToCaseMapping);
-            TestMethodContext methodContext = new TestMethodContext(tmsId, testNgMethod, customResultFields, true);
-            boolean isSuccessfully = postResultOperationSuccessfully(() -> postResult(runContext, methodContext), tmsId, testNgMethod);
+            boolean isSuccessfully = postResultOperationSuccessfully(() -> postResult(testRail, testRun, tmsId,
+                    testNgMethod, context, customResultFields, true, resultsToCaseMapping), tmsId, testNgMethod);
             if (!isSuccessfully) {
                 postResultOperationSuccessfully(() ->
                 {
-                    methodContext.setWithDetails(false);
-                    postResultOperationSuccessfully(() -> postResult(runContext, methodContext), tmsId, testNgMethod);
+                    postResult(testRail, testRun, tmsId, testNgMethod, context, customResultFields, false,
+                            resultsToCaseMapping);
                 }, tmsId, testNgMethod);
             }
         });
@@ -146,7 +143,7 @@ public class NotificationService {
             return sb.toString();
         }
 
-        if (testRailTotal != testRailPassed) {
+        if(testRailTotal != testRailPassed){
             sb.append(" 🔴");
         } else {
             sb.append(" ✅");
@@ -208,56 +205,60 @@ public class NotificationService {
         }
     }
 
+    @SuppressWarnings("checkstyle:parameterNumber")
+    private void postResult(TestRail testRail, Run testRun, int tmsId, ITestNGMethod relatedMethod,
+                            ITestContext context, List<ResultField> customResultFields, boolean withDetails,
+                            Map<Integer, Integer> resultsToCaseMapping) {
+        List<ITestResult> allTestResults = getAllResults(relatedMethod, context);
 
-    private void postResult(TestRunContext runContext, TestMethodContext methodContext) {
-        List<ITestResult> allTestResults = getAllResults(methodContext.getRelatedMethod(), runContext.getContext());
+        List<ITestResult> failed = allTestResults.stream().filter(r -> ITestResult.FAILURE == r.getStatus())
+                .collect(Collectors.toList());
 
-        List<ITestResult> failed = getResultsByStatus(allTestResults, ITestResult.FAILURE);
-        List<ITestResult> skipped = getResultsByStatus(allTestResults, ITestResult.SKIP);
+        List<ITestResult> skipped = allTestResults.stream().filter(r -> ITestResult.SKIP == r.getStatus())
+                .collect(Collectors.toList());
 
-        int statusId = generateStatusId(methodContext, failed, skipped);
+        Optional<Defects> optionalDefects = TestNgRpUtils.getOrEmptyAnnotation(relatedMethod, Defects.class);
+        Optional<AutomationIssue> optionalAutomationIssues = TestNgRpUtils.getOrEmptyAnnotation(relatedMethod,
+                AutomationIssue.class);
+        int statusId;
 
-        String comment = getComment(allTestResults, methodContext.isWithDetails());
-        Optional<Defects> optionalDefects = TestNgRpUtils.getOrEmptyAnnotation(methodContext.getRelatedMethod(), Defects.class);
+        //considered test as failed
+        if (!failed.isEmpty()) {
+            statusId = TestNgRpUtils.isKnownIssue(optionalDefects, failed)
+                    ? TestRailResultStatus.KNOWN_ISSUE.value
+                    : testNgStatusToTestRailStatus(ITestResult.FAILURE);
+            if (statusId == testNgStatusToTestRailStatus(ITestResult.FAILURE)) {
+                statusId = TestNgRpUtils.isAutomationIssue(optionalAutomationIssues, failed)
+                        ? TestRailResultStatus.AUTOMATION_ISSUE.value
+                        : testNgStatusToTestRailStatus(ITestResult.FAILURE);
+            }
+        } else if (!skipped.isEmpty()) {
+            statusId = TestNgRpUtils.isKnownIssue(optionalDefects, skipped)
+                    ? TestRailResultStatus.KNOWN_ISSUE.value
+                    : testNgStatusToTestRailStatus(ITestResult.SKIP);
+            if (statusId == testNgStatusToTestRailStatus(ITestResult.SKIP)) {
+                statusId = TestNgRpUtils.isAutomationIssue(optionalAutomationIssues, skipped)
+                        ? TestRailResultStatus.AUTOMATION_ISSUE.value
+                        : testNgStatusToTestRailStatus(ITestResult.SKIP);
+            }
+        } else {
+            statusId = testNgStatusToTestRailStatus(ITestResult.SUCCESS);
+        }
+
+        String comment = getComment(allTestResults, withDetails);
         List<String> defects = TestNgRpUtils.getDefects(optionalDefects);
+        defects.addAll(TestNgRpUtils.getAutomationIssues(optionalAutomationIssues));
+        Result testRailResult = new Result().setDefects(TestNgRpUtils.getDefects(optionalDefects)).setComment(comment);
 
-        Result testRailResult = new Result().setDefects(defects).setComment(comment);
-
-        if (statusId != TestRailResultStatus.UNTESTED.value) {
+        //if not Untested
+        if (TestRailResultStatus.UNTESTED.value != statusId) {
             testRailResult.setStatusId(statusId);
         }
 
-        var results = runContext.getTestRail().results().addForCase(runContext.getTestRun().getId(),
-                methodContext.getTmsId(), testRailResult, methodContext.getCustomResultFields()).execute();
+        var results = testRail.results().addForCase(testRun.getId(), tmsId, testRailResult, customResultFields)
+                .execute();
 
-        runContext.getResultsToCaseMapping().put(results.getId(), methodContext.getTmsId());
-    }
-
-    private List<ITestResult> getResultsByStatus(List<ITestResult> allResults, int status) {
-        return allResults.stream().filter(r -> r.getStatus() == status).collect(Collectors.toList());
-    }
-
-    private int generateStatusId(TestMethodContext methodContext, List<ITestResult> failed, List<ITestResult> skipped) {
-        Optional<Defects> optionalDefects = TestNgRpUtils.getOrEmptyAnnotation(methodContext.getRelatedMethod(), Defects.class);
-        Optional<AutomationIssue> optionalAutomationIssues = TestNgRpUtils.getOrEmptyAnnotation(methodContext.getRelatedMethod(), AutomationIssue.class);
-
-        if (!failed.isEmpty()) {
-            return getStatusIdForResults(failed, ITestResult.FAILURE, optionalDefects, optionalAutomationIssues);
-        } else if (!skipped.isEmpty()) {
-            return getStatusIdForResults(skipped, ITestResult.SKIP, optionalDefects, optionalAutomationIssues);
-        } else {
-            return testNgStatusToTestRailStatus(ITestResult.SUCCESS);
-        }
-    }
-
-    private int getStatusIdForResults(List<ITestResult> results, int status, Optional<Defects> optionalDefects, Optional<AutomationIssue> optionalAutomationIssues) {
-        int initialStatusId = TestNgRpUtils.isKnownIssue(optionalDefects, results)
-                ? TestRailResultStatus.KNOWN_ISSUE.value
-                : testNgStatusToTestRailStatus(status);
-
-        return (initialStatusId == testNgStatusToTestRailStatus(status) && TestNgRpUtils.isAutomationIssue(optionalAutomationIssues, results))
-                ? TestRailResultStatus.AUTOMATION_ISSUE.value
-                : initialStatusId;
+        resultsToCaseMapping.put(results.getId(), tmsId);
     }
 
     private List<ITestResult> getAllResults(ITestNGMethod relatedMethod, ITestContext context) {

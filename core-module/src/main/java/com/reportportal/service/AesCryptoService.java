@@ -27,7 +27,7 @@ public class AesCryptoService
     {
         try
         {
-            Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "AES"),
                     new IvParameterSpec(new byte[16]));
             byte[] encryptedBytes = cipher.doFinal(encodedString.getBytes(StandardCharsets.UTF_8));
@@ -44,7 +44,7 @@ public class AesCryptoService
     {
         try
         {
-            Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "AES"),
                     new IvParameterSpec(new byte[16]));
             byte[] decryptedBytes = cipher.doFinal(Base64.getDecoder().decode(decodedString));

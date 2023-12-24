@@ -21,7 +21,7 @@ public class FirefoxStrategy extends AbstractDriverStrategy
     {
         FirefoxOptions options = new FirefoxOptions();
         options.addArguments("-headless");
-        if (isHeadless) {
+        if (Boolean.TRUE.equals(isHeadless)) {
             options.addArguments("-headless");
         }
         FirefoxDriver driver = new FirefoxDriver(options);

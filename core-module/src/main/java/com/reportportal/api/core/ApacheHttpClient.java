@@ -1,21 +1,10 @@
 package com.reportportal.api.core;
 
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.reportportal.exceptions.AutomationException;
 import com.reportportal.meta.ApiMethod;
-
-import org.apache.hc.client5.http.classic.methods.HttpDelete;
-import org.apache.hc.client5.http.classic.methods.HttpGet;
-import org.apache.hc.client5.http.classic.methods.HttpPatch;
-import org.apache.hc.client5.http.classic.methods.HttpPost;
-import org.apache.hc.client5.http.classic.methods.HttpPut;
-import org.apache.hc.client5.http.classic.methods.HttpUriRequestBase;
+import org.apache.hc.client5.http.classic.methods.*;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.core5.http.ContentType;
@@ -23,6 +12,11 @@ import org.apache.hc.core5.http.HttpHeaders;
 import org.apache.hc.core5.http.io.HttpClientResponseHandler;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
 import org.apache.hc.core5.http.io.entity.StringEntity;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ApacheHttpClient extends AbstractApiClient {
 
@@ -48,7 +42,7 @@ public class ApacheHttpClient extends AbstractApiClient {
 
             return client.execute(request, handler);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new IllegalArgumentException(e);
         }
     }
 
@@ -85,7 +79,7 @@ public class ApacheHttpClient extends AbstractApiClient {
                 default -> throw new AutomationException("Unable to process method: ", method);
             }
         } catch (JsonProcessingException e) {
-            throw new RuntimeException("Failed to serialize request body", e);
+            throw new IllegalArgumentException("Failed to serialize request body", e);
         }
     }
 }

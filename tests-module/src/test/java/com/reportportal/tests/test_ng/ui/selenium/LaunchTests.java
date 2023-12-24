@@ -1,7 +1,6 @@
 package com.reportportal.tests.test_ng.ui.selenium;
 
-import java.util.List;
-
+import com.reportportal.annotations.TmsId;
 import com.reportportal.core.test_ng.AbstractWebTestNG;
 import com.reportportal.models.User;
 import com.reportportal.service.SuitesDataReaderService;
@@ -9,12 +8,13 @@ import com.reportportal.service.TestNGDataProvider;
 import com.reportportal.service.UserDataService;
 import com.reportportal.ui.pages.LaunchesPage;
 import com.reportportal.ui.steps.LoginSteps;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 public class LaunchTests extends AbstractWebTestNG
 {
@@ -35,6 +35,7 @@ public class LaunchTests extends AbstractWebTestNG
     }
 
     @Test(dataProvider = "suites", dataProviderClass = TestNGDataProvider.class)
+    @TmsId(20550)
     public void checkLaunches(Integer launchID)
     {
         loginSteps.login(user);

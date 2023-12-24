@@ -18,8 +18,8 @@ allprojects {
         webdriverManagerVer = "5.6.1"
         testngVer = "7.7.0"
         junitVer = "5.9.2"
-        reportportalTestNgVer = "5.3.1"
-        reportportalLogBackVer = "5.1.6"
+        reportportalTestNgVer = "5.1.3"
+        reportportalLogBackVer = "5.1.3"
         feignVer = "1.4.7.RELEASE"
         openFeignVer = "4.0.4"
         feignJacksonVer = "13.1"
@@ -45,8 +45,10 @@ allprojects {
         selenideVersion = "7.0.3"
         allureSelenideVersion = "2.24.0"
         reportPortalLoggerVer = "5.1.4"
-        restAssuredVer="5.3.2"
-        httpclient5Ver="5.2.1"
+        restAssuredVer = "5.3.2"
+        httpclient5Ver = "5.2.1"
+        testRailApiJavaVer = "2.0.2"
+        jerseyVer = "1.19.4"
     }
 
     apply plugin: 'org.springframework.boot'
@@ -58,6 +60,10 @@ allprojects {
         mavenCentral()
         maven {
             url "https://packages.atlassian.com/maven/repository/public"
+        }
+        mavenLocal()
+        flatDir {
+            dirs "$rootProject.projectDir/libs"
         }
     }
 
@@ -111,6 +117,12 @@ allprojects {
         implementation "io.rest-assured:rest-assured:${restAssuredVer}"
         implementation "io.rest-assured:xml-path:${restAssuredVer}"
         implementation "org.apache.httpcomponents.client5:httpclient5:${httpclient5Ver}"
+        testImplementation  "org.assertj:assertj-core:${assertjVer}"
+        testImplementation "ru.yandex.qatools.ashot:ashot:${ashotVer}"
+        implementation "com.codepine.api:testrail-api-java-client:${testRailApiJavaVer}"
+        implementation 'ms-teams-incoming-webhook:ms-teams-incoming-webhook:1.1.1'
+        implementation 'jakarta.xml.bind:jakarta.xml.bind-api:2.3.3'//For integration with TestRail
+        implementation "com.sun.jersey:jersey-client:${jerseyVer}"
     }
 
     task checkstyle(type: Checkstyle) {
@@ -148,7 +160,7 @@ project(':tests-module') {
         maxHeapSize = '1G'
         useTestNG() {
             //listeners << 'com.reportportal.core.test_ng.SeleniumScreenShotOnFailListener'
-            listeners << 'com.reportportal.core.test_ng.SelenideScreenShotOnFailListener'
+            //listeners << 'com.reportportal.core.test_ng.SelenideScreenShotOnFailListener'
             options {
                 setParallel("classes")
                 setThreadCount(5)

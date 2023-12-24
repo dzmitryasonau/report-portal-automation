@@ -8,6 +8,12 @@ plugins {
     id 'java'
 }
 
+sonarqube {
+    properties {
+        property "sonar.java.libraries", configurations.runtimeClasspath.join(File.pathSeparator)
+    }
+}
+
 allprojects {
     ext {
         springBootVer = "3.1.5"

@@ -37,3 +37,6 @@ replay_pid*
 
 #properties
 /core-module/src/main/resources/local.properties
+
+#local-libs
+!libs/ms-teams-incoming-webhook-1.1.1.jar

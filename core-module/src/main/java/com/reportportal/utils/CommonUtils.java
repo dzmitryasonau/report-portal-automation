@@ -4,12 +4,13 @@ import io.vavr.control.Try;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 public final class CommonUtils
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(CommonUtils.class);
-    private static final Random RANDOM = new Random();
+    private static final SecureRandom RANDOM = new SecureRandom();
 
     private CommonUtils()
     {

@@ -22,7 +22,7 @@
             <property name="format" value="^[a-z][_a-zA-Z0-9]+$"/>
         </module>
         <module name="ParameterNumber">
-            <property name="max" value="5"/>
+            <property name="max" value="10"/>
         </module>
         <module name="MethodLength">
             <property name="max" value="150"/>

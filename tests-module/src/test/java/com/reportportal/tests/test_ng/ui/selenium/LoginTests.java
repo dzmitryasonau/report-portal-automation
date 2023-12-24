@@ -1,4 +1,4 @@
-package com.reportportal.tests.test_ng.ui;
+package com.reportportal.tests.test_ng.ui.selenium;
 
 import com.reportportal.core.test_ng.AbstractWebTestNG;
 import com.reportportal.models.User;
@@ -33,7 +33,15 @@ public class LoginTests extends AbstractWebTestNG
         user = userDataService.getUser();
         loginSteps.login(user);
         verifyThat.actualIsEqualToExpected(launchesPage.openUserBlock().getUserName().toLowerCase(),
-                user.getLogin().toLowerCase(),
+                user.getLogin().toLowerCase(), "User name is correct, ");
+    }
+
+    @Test
+    public void failedLoginToUI()
+    {
+        user = userDataService.getUser();
+        loginSteps.login(user);
+        verifyThat.actualIsEqualToExpected(launchesPage.openUserBlock().getUserName().toLowerCase(), "Incorrect name",
                 "User name is correct, ");
     }
 

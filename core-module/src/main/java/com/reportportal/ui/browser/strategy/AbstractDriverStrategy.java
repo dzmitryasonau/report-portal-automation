@@ -24,22 +24,14 @@ public abstract class AbstractDriverStrategy
 
     public WebDriver getDriver()
     {
-        try
+        WebDriverManager instance = WebDriverManager.getInstance(getDriverManagerType());
+        String browserVersion = webConfiguration.getBrowserVersion();
+        boolean isLatest = Objects.nonNull(browserVersion) && "latest".equalsIgnoreCase(browserVersion);
+        if (!isLatest)
         {
-            WebDriverManager instance = WebDriverManager.getInstance(getDriverManagerType());
-            String browserVersion = webConfiguration.getBrowserVersion();
-            boolean isLatest = Objects.nonNull(browserVersion) && "latest".equalsIgnoreCase(browserVersion);
-            if (!isLatest)
-            {
-                instance = instance.browserVersion(browserVersion);
-            }
-            instance.setup();
+            instance = instance.browserVersion(browserVersion);
         }
-        catch (NoSuchMethodError e)
-        {
-            System.setProperty("webdriver.chrome.driver", webConfiguration.getWebdriverPath());
-            //Workaround to avoid mentioned exception. Unable to find fast better solution
-        }
+        instance.setup();
         return getLocalDriverInstance();
     }
 }

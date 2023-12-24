@@ -36,8 +36,6 @@ public class WebConfiguration extends BaseEntity
     private Long timeOutSeconds;
     @Value("${ui.polling.timeout.milliseconds}")
     private Long pollingTimeOutMilliSeconds;
-    @Value("${webdriver.chrome.driver}")
-    private String webdriverPath;
     private Map<String, String> remoteCapabilities;
 
     @PostConstruct

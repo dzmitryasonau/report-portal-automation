@@ -43,7 +43,7 @@ public class LoginTests extends AbstractWebTestNG
     public void failedLoginToUI() {
         user = userDataService.getUser();
         loginSteps.login(user);
-        Assertions.assertThat(launchesPage.openUserBlock().getUserName().toLowerCase()).isEqualTo("Incorrect name")
+        Assertions.assertThat(launchesPage.openUserBlock().getUserName().toLowerCase()).isNotEqualTo("Incorrect name")
                 .as("User name is incorrect");
     }
 

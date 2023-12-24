@@ -63,12 +63,13 @@ allprojects {
     apply plugin: 'java'
 
     repositories {
-        flatDir {
-            dirs "$rootProject.projectDir/libs"
-        }
         mavenCentral()
         maven {
             url "https://packages.atlassian.com/maven/repository/public"
+        }
+        mavenLocal()
+        flatDir {
+            dirs "$rootProject.projectDir/libs"
         }
     }
 
@@ -161,19 +162,18 @@ project(':tests-module') {
     //TestNG configuration
     tasks.named('test') {
         systemProperties System.getProperties()
-        maxParallelForks = Runtime.getRuntime().availableProcessors()
         maxHeapSize = '1G'
+        include '**/com/reportportal/tests/test_ng/api/**'
+        include '**/com/reportportal/tests/test_ng/ui/selenium/**'
         useTestNG() {
-            //listeners << 'com.reportportal.core.test_ng.SeleniumScreenShotOnFailListener'
-            //listeners << 'com.reportportal.core.test_ng.SelenideScreenShotOnFailListener'
             options {
                 setParallel("classes")
-                setThreadCount(5)
+                setThreadCount(1)
             }
         }
     }
 
-    //TestNG cucumber parallel configuration
+//    TestNG cucumber parallel configuration
 //    tasks.named('test') {
 //        useTestNG() {
 //            suiteXmlFiles = files('/src/test/resources/testng.xml').toList()

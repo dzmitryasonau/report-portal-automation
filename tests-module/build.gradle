@@ -20,4 +20,5 @@ dependencies {
     implementation "io.github.openfeign:feign-hc5:${feignHttpClient5Ver}"
     implementation "org.apache.poi:poi-ooxml:${apachcePoi}"
     implementation "com.codeborne:selenide:${selenideVersion}"
+    implementation 'ms-teams-incoming-webhook:ms-teams-incoming-webhook:1.1.1'
 }

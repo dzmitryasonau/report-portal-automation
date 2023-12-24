@@ -19,7 +19,7 @@ public class ChromeStrategy extends AbstractDriverStrategy {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
         options.addArguments("--remote-allow-origins=*");
-        if (isHeadless) {
+        if (Boolean.TRUE.equals(isHeadless)) {
             options.addArguments("--headless");
         }
         return new ChromeDriver(options);

@@ -1,10 +1,5 @@
 package com.reportportal.ui.core;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Objects;
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
@@ -12,7 +7,6 @@ import com.codeborne.selenide.SelenideElement;
 import com.reportportal.reporting.ReportService;
 import com.reportportal.utils.CommonUtils;
 import com.reportportal.utils.ObjectFormatUtils;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
@@ -20,11 +14,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+
 @Component
 public class SelenideActions
 {
     private static final Integer MAX_SCROLLS = 10;
     private static final Integer MAX_REFRESHES = 10;
+
     @Value("${ui.polling.timeout.milliseconds}")
     private Long pollingTimeOutMilliSeconds;
     @Autowired

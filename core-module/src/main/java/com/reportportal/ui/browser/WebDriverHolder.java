@@ -1,35 +1,27 @@
 package com.reportportal.ui.browser;
 
-import java.io.File;
-import java.io.IOException;
-import java.time.Duration;
-import java.util.ConcurrentModificationException;
-import java.util.Objects;
-
 import com.reportportal.exceptions.AutomationException;
 import com.reportportal.exceptions.TestExecutionException;
 import com.reportportal.meta.RunType;
 import com.reportportal.ui.WebConfiguration;
-
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.UnhandledAlertException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.MoveTargetOutOfBoundsException;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.SessionId;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.testng.ITestResult;
 
+import java.io.File;
+import java.io.IOException;
+import java.time.Duration;
+import java.util.ConcurrentModificationException;
+import java.util.Objects;
+
 public final class WebDriverHolder {
 
-    private final static ThreadLocal<WebDriver> webDriver = new InheritableThreadLocal<>();
-    private final static ThreadLocal<FluentWait<WebDriver>> webDriverWait = new InheritableThreadLocal<>();
+    private static final ThreadLocal<WebDriver> webDriver = new InheritableThreadLocal<>();
+    private static final  ThreadLocal<FluentWait<WebDriver>> webDriverWait = new InheritableThreadLocal<>();
     private static WebDriverHolder instance;
     private WebConfiguration webConfiguration;
 

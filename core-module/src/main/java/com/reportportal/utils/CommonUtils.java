@@ -1,15 +1,15 @@
 package com.reportportal.utils;
 
-import java.util.Random;
-
+import io.vavr.control.Try;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.vavr.control.Try;
+import java.util.Random;
 
 public final class CommonUtils
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(CommonUtils.class);
+    private static final Random RANDOM = new Random();
 
     private CommonUtils()
     {
@@ -17,7 +17,7 @@ public final class CommonUtils
 
     public static Integer getRandomInteger(int max, int min)
     {
-        return new Random().nextInt(min, max);
+        return RANDOM.nextInt(min, max);
     }
 
     public static Integer getRandomInteger(int max)

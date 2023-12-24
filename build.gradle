@@ -63,13 +63,12 @@ allprojects {
     apply plugin: 'java'
 
     repositories {
+        flatDir {
+            dirs "$rootProject.projectDir/libs"
+        }
         mavenCentral()
         maven {
             url "https://packages.atlassian.com/maven/repository/public"
-        }
-        mavenLocal()
-        flatDir {
-            dirs "libs"
         }
     }
 

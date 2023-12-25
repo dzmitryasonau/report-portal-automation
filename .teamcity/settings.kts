@@ -38,7 +38,6 @@ project {
 
     buildType(Daily_Run)
     buildType(Build)
-    buildType(CommitToMaster)
 
     params {
         param("env.notifications.enabled", "true")
@@ -108,22 +107,6 @@ object Build : BuildType({
                     token = "credentialsJSON:b588e6cd-d2c1-4d32-9193-114cdb4a42d5"
                 }
             }
-        }
-    }
-})
-
-object CommitToMaster : BuildType({
-    name = "Commit to master"
-
-    vcs {
-        root(DslContext.settingsRoot)
-    }
-
-    steps {
-        gradle {
-            id = "gradle_runner"
-            tasks = "clean build"
-            gradleWrapperPath = ""
         }
     }
 })

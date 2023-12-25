@@ -38,6 +38,7 @@ project {
 
     buildType(Daily_Run)
     buildType(Build)
+    buildType(CommitToMaster)
 
     params {
         param("env.notifications.enabled", "true")
@@ -109,6 +110,10 @@ object Build : BuildType({
             }
         }
     }
+})
+
+object CommitToMaster : BuildType({
+    name = "Commit to master"
 })
 
 object Daily_Run : BuildType({

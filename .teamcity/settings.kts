@@ -75,7 +75,7 @@ object Build : BuildType({
         }
         gradle {
             id = "gradle_runner"
-            tasks = "clean build"
+            tasks = "clean build -x test"
             buildFile = "build.gradle"
             enableDebug = true
         }

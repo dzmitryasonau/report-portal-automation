@@ -114,6 +114,10 @@ object Build : BuildType({
 
 object CommitToMaster : BuildType({
     name = "Commit to master"
+
+    vcs {
+        root(DslContext.settingsRoot)
+    }
 })
 
 object Daily_Run : BuildType({

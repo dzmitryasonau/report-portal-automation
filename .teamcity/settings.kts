@@ -84,12 +84,6 @@ object Build : BuildType({
     triggers {
         vcs {
         }
-        schedule {
-            schedulingPolicy = daily {
-                hour = 8
-            }
-            triggerBuild = always()
-        }
     }
 
     features {

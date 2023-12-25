@@ -118,6 +118,14 @@ object CommitToMaster : BuildType({
     vcs {
         root(DslContext.settingsRoot)
     }
+
+    steps {
+        gradle {
+            id = "gradle_runner"
+            tasks = "clean build"
+            gradleWrapperPath = ""
+        }
+    }
 })
 
 object Daily_Run : BuildType({

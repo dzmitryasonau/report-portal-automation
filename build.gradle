@@ -15,7 +15,7 @@ allprojects {
         seleniumHttpJdkVer = "4.13.0"
         sauceRestVer = "2.0.2"
         webdriverManagerVer = "5.6.1"
-        testngVer = "7.7.0"
+        testngVer = "7.9.0"
         junitVer = "5.9.2"
         reportportalTestNgVer = "5.3.1"
         reportportalLogBackVer = "5.1.6"

@@ -10,26 +10,26 @@ import org.springframework.beans.factory.annotation.Value;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-public abstract class AbstractSelenideWebTestNG extends AbstractTestNG
-{
+public abstract class AbstractSelenideWebTestNG extends AbstractTestNG {
     @Value("${browser.name}")
     private String browserName;
     @Value("${app.base.url}")
     private String url;
+    @Value("${browser.headless}")
+    private String headless;
 
     @BeforeMethod(alwaysRun = true)
-    public void beforeEachMethodSetupWeb()
-    {
+    public void beforeEachMethodSetupWeb() {
         Configuration.baseUrl = url;
         Configuration.browser = browserName;
+        Configuration.headless = Boolean.parseBoolean(headless);
         Selenide.open("/");
         SelenideLogger.addListener("Report Portal logger", new ReportPortalSelenideEventListener());
         WebDriverRunner.getWebDriver().manage().window().maximize();
     }
 
     @AfterMethod(alwaysRun = true)
-    public void afterEachMethodTearDownWeb()
-    {
+    public void afterEachMethodTearDownWeb() {
         Selenide.closeWebDriver();
     }
 }

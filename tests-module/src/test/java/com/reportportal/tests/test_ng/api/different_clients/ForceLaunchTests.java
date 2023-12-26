@@ -1,14 +1,11 @@
 package com.reportportal.tests.test_ng.api.different_clients;
 
-import java.io.IOException;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.reportportal.annotations.TmsId;
 import com.reportportal.api.HttpClient;
 import com.reportportal.api.core.CustomResponse;
+import com.reportportal.api.steps.LaunchApiSteps;
 import com.reportportal.core.test_ng.AbstractTestNG;
 import com.reportportal.models.User;
 import com.reportportal.models.launch.Launch;
@@ -17,20 +14,26 @@ import com.reportportal.models.launch.api.StartLaunchRequest;
 import com.reportportal.service.AesCryptoService;
 import com.reportportal.service.UserDataService;
 import com.reportportal.utils.CommonUtils;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class ForceLaunchTests extends AbstractTestNG
 {
-    private static final String LAUNCH_NAME = "Demo Api Tests";
+    private static final String LAUNCH_NAME = "Created_Api_Tests";
     @Autowired
     private UserDataService userDataService;
     @Autowired
     private AesCryptoService aesCryptoService;
+    @Autowired
+    private LaunchApiSteps launchApiSteps;
     @Value("${rp.project}")
     private String projectName;
     @Autowired
@@ -50,6 +53,7 @@ public class ForceLaunchTests extends AbstractTestNG
     }
 
     @Test
+    @TmsId(20622)
     public void checkLaunchForceFinish()
     {
         CustomResponse response = httpClient.finishLaunch(token, projectName, launch.getContent().get(0).getUuid(),
@@ -82,5 +86,8 @@ public class ForceLaunchTests extends AbstractTestNG
     private void tearDown()
     {
         userDataService.releaseUser(user);
+        if (token != null && projectName != null && launch != null) {
+            launchApiSteps.deleteLaunch(token, projectName, launch);
+        }
     }
 }

@@ -44,7 +44,7 @@ public class CustomResponseEntityDecoder implements Decoder {
     }
 
     private boolean isHttpEntity(Type type) {
-        if (type instanceof Class c) {
+        if (type instanceof Class<?> c) {
             return HttpEntity.class.isAssignableFrom(c);
         }
         return false;

@@ -1,10 +1,9 @@
 package com.reportportal.tests.test_ng.api.different_clients;
 
-import java.util.List;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.reportportal.annotations.TmsId;
 import com.reportportal.api.HttpClient;
 import com.reportportal.api.core.CustomResponse;
 import com.reportportal.core.test_ng.AbstractTestNG;
@@ -12,12 +11,13 @@ import com.reportportal.exceptions.AutomationException;
 import com.reportportal.models.User;
 import com.reportportal.service.AesCryptoService;
 import com.reportportal.service.UserDataService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 public class GetProjectLaunchesTests extends AbstractTestNG
 {
@@ -39,6 +39,7 @@ public class GetProjectLaunchesTests extends AbstractTestNG
     }
 
     @Test
+    @TmsId(20620)
     public void checkGetProjectLaunchesWithFilter()
     {
         String token = aesCryptoService.getDecryptedBearerApiKey(user);
@@ -56,6 +57,7 @@ public class GetProjectLaunchesTests extends AbstractTestNG
     }
 
     @Test
+    @TmsId(20621)
     public void checkGetProjectLaunchesWithFilterInvalidToken()
     {
         String token = "Invalid token";

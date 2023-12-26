@@ -17,9 +17,14 @@ public class FirefoxStrategy extends AbstractDriverStrategy
     }
 
     @Override
-    protected WebDriver getLocalDriverInstance()
+    protected WebDriver getLocalDriverInstance(Boolean isHeadless)
     {
-        FirefoxDriver driver = new FirefoxDriver(new FirefoxOptions());
+        FirefoxOptions options = new FirefoxOptions();
+        options.addArguments("-headless");
+        if (Boolean.TRUE.equals(isHeadless)) {
+            options.addArguments("-headless");
+        }
+        FirefoxDriver driver = new FirefoxDriver(options);
         driver.manage().window().maximize();
         return driver;
     }

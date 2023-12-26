@@ -1,17 +1,15 @@
 package com.reportportal.meta;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.reportportal.exceptions.TestExecutionException;
+import com.reportportal.utils.ObjectFormatUtils;
+import org.springframework.util.ReflectionUtils;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import org.springframework.util.ReflectionUtils;
-
-import com.reportportal.exceptions.TestExecutionException;
-import com.reportportal.utils.ObjectFormatUtils;
 
 public abstract class BaseEntity {
 

@@ -1,6 +1,7 @@
 dependencies {
     implementation project(':core-module')
     implementation "org.seleniumhq.selenium:selenium-java:${seleniumVer}"
+    implementation "org.assertj:assertj-core:${assertjVer}"
     implementation "com.epam.reportportal:agent-java-testng:${reportportalTestNgVer}"
     implementation "com.epam.reportportal:logger-java-logback:${reportportalLogBackVer}"
     implementation "com.opencsv:opencsv:${openCsvVer}"
@@ -19,4 +20,5 @@ dependencies {
     implementation "io.github.openfeign:feign-hc5:${feignHttpClient5Ver}"
     implementation "org.apache.poi:poi-ooxml:${apachcePoi}"
     implementation "com.codeborne:selenide:${selenideVersion}"
+    implementation 'ms-teams-incoming-webhook:ms-teams-incoming-webhook:1.1.1'
 }

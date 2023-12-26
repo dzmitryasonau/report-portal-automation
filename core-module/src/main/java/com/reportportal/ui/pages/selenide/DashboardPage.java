@@ -7,7 +7,7 @@ import com.reportportal.ui.components.AbstractSelenidePage;
 @Page
 public class DashboardPage extends AbstractSelenidePage
 {
-    private final static String DASHBOARD_ROW_TEMPLATE = "//div[contains(@class,'gridRow')]//a[text()='%s']";
+    private static final String DASHBOARD_ROW_TEMPLATE = "//div[contains(@class,'gridRow')]//a[text()='%s']";
 
     public void openDashboardByName(String dashboardName)
     {

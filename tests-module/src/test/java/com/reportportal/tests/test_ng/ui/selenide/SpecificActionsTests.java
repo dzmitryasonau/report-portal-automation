@@ -41,7 +41,7 @@ public class SpecificActionsTests extends AbstractSelenideWebTestNG
     @Autowired
     private DashboardPage dashboardPage;
     @Autowired
-    @Qualifier("selenideLoginPage")
+    @Qualifier("selenideLoginSteps")
     private LoginSteps loginSteps;
     private User user;
 

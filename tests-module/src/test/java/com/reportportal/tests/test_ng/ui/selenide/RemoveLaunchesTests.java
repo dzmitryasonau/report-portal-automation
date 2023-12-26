@@ -30,7 +30,7 @@ import org.testng.annotations.Test;
 
 public class RemoveLaunchesTests extends AbstractSelenideWebTestNG
 {
-    private static final String LAUNCH_NAME = "Demo_Api_Tests";
+    private static final String LAUNCH_NAME = "Created_Api_Tests";
     @Autowired
     private UserDataService userDataService;
     @Autowired

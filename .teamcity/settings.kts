@@ -113,6 +113,7 @@ object Build : BuildType({
 
 object Daily_Run : BuildType({
     name = "Daily run"
+    paused = true
 
     vcs {
         root(HttpsGithubComDzmitryasonauReportPortalAutomationGitRefsHeadsMain1)

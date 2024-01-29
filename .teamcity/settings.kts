@@ -56,6 +56,7 @@ project {
 
 object Build : BuildType({
     name = "VCS Build"
+    paused = true
 
     vcs {
         root(DslContext.settingsRoot)

@@ -16,7 +16,7 @@ sonarqube {
 
 allprojects {
     ext {
-        springBootVer = "3.1.5"
+        springBootVer = "3.2.1"
         springFoxVer = "3.0.0"
         seleniumVer = "4.16.1"
         seleniumHttpJdkVer = "4.13.0"

@@ -20,7 +20,7 @@ import java.util.Map;
 public class LaunchInfoTests extends AbstractTestNG
 {
     private static final String FILTER = "demo";
-    private static final Integer LAST_LAUNCH_ID = 6262805;
+    private static final Integer LAST_LAUNCH_ID = 8931847;
     @Autowired
     private ApiSteps apiSteps;
     @Autowired

@@ -8,15 +8,15 @@ Feature: Verify launch statuses
   @used_API_connection
   Scenario: Check launches status via API
     When I get status of launches:
-      | 6262801 |
-      | 6262802 |
-      | 6262803 |
-      | 6262804 |
-      | 6262805 |
+      | 8931843 |
+      | 8931844 |
+      | 8931845 |
+      | 8931846 |
+      | 8931847 |
     Then launch statuses correspond to the table:
       | launchId | launchStatus |
-      | 6262801  | FAILED       |
-      | 6262802  | FAILED       |
-      | 6262803  | FAILED       |
-      | 6262804  | FAILED       |
-      | 6262805  | PASSED       |
+      | 8931843  | FAILED       |
+      | 8931844  | FAILED       |
+      | 8931845  | FAILED       |
+      | 8931846  | FAILED       |
+      | 8931847  | PASSED       |

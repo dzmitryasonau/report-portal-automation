@@ -7,9 +7,9 @@ Feature: Viewing test launches
     When I login in app
 
   @used_UI_login
-  Scenario: User check suites for launch with id 6262801
+  Scenario: User check suites for launch with id 8931843
     When I open launches page
-    And I open launch by it's id 6262801
+    And I open launch by it's id 8931843
     Then the following suites exists:
       | Suite with retries      |
       | Suite with nested steps |
@@ -22,9 +22,9 @@ Feature: Viewing test launches
       | Sharing tests     |
 
   @used_UI_login
-  Scenario: User check suites for launch with id 6262805
+  Scenario: User check suites for launch with id 8931847
     When I open launches page
-    And I open launch by it's id 6262805
+    And I open launch by it's id 8931847
     Then the following suites exists:
       | Suite with retries      |
       | Suite with nested steps |

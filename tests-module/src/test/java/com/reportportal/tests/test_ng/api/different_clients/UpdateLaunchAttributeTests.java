@@ -19,7 +19,7 @@ import java.util.List;
 
 public class UpdateLaunchAttributeTests extends AbstractTestNG
 {
-    private static final Integer LAST_LAUNCH_ID = 6262805;
+    private static final Integer LAST_LAUNCH_ID = 8931847;
     private static final String ATTRIBUTE_PREFIX = "Atr: ";
     private static final String ATTRIBUTE_VALUE = "value";
     private static final Integer MAX_INDEX = 10000;

@@ -110,8 +110,8 @@ public class MoveToLaunchViewTests extends AbstractSelenideWebTestNG
     @DataProvider(name = "launchesData")
     private static Object[][] getLaunchesData()
     {
-        return new Object[][] { { new LaunchStatisticsCard(6262803, 20, 10, 8, 2, 4, 4, 0, 10) },
-                { new LaunchStatisticsCard(6262802, 15, 5, 9, 1, 1, 5, 4, 8) } };
+        return new Object[][] { { new LaunchStatisticsCard(8931845, 20, 10, 8, 2, 4, 4, 0, 10) },
+                { new LaunchStatisticsCard(8931844, 15, 5, 9, 1, 1, 5, 4, 8) } };
     }
 
     @AfterMethod

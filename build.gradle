@@ -82,8 +82,8 @@ allprojects {
 
     group 'com.reportportal'
     version '1.0-SNAPSHOT'
-    java.sourceCompatibility = JavaVersion.VERSION_17
-    java.targetCompatibility = JavaVersion.VERSION_17
+    java.sourceCompatibility = JavaVersion.VERSION_21
+    java.targetCompatibility = JavaVersion.VERSION_21
 
     configurations {
         compileOnly {
@@ -146,7 +146,7 @@ allprojects {
             dependsOn('checkstyle')
         }
         task.options.encoding(StandardCharsets.UTF_8.name())
-        task.options.release.set(17)
+        task.options.release.set(21)
     }
 
     jar {
@@ -165,6 +165,7 @@ project(':tests-module') {
         maxHeapSize = '1G'
         include '**/com/reportportal/tests/test_ng/api/**'
         include '**/com/reportportal/tests/test_ng/ui/selenium/**'
+        include '**/com/reportportal/tests/test_ng/ui/selenide/**'
         useTestNG() {
             options {
                 setParallel("classes")

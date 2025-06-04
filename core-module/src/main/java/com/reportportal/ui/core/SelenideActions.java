@@ -205,4 +205,18 @@ public class SelenideActions
         reportService.debug("Element is visible: **%s**", element);
         return this;
     }
+
+    public SelenideActions waitUntilInvisible(SelenideElement element)
+    {
+        wait.until(webDriver ->
+        {
+            if (!element.isDisplayed())
+            {
+                return true;
+            }
+            throw new NoSuchElementException("Element is visible: " + element);
+        }, "Waiting for element to be invisible: **%s**", element);
+        reportService.debug("Element is invisible: **%s**", element);
+        return this;
+    }
 }

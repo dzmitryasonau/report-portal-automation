@@ -53,7 +53,7 @@ public class LaunchInfoTests extends AbstractJUnit
     public void checkLastLaunch()
     {
         Launch launch = apiSteps.getLastLaunchesByProjectName(user, projectName);
-        verifyThat.actualIsEqualToExpected(launch.getContent().get(0).getId(), 6262805, "Last launch id is correct, ");
+        verifyThat.actualIsEqualToExpected(launch.getContent().get(0).getId(), 8931847, "Last launch id is correct, ");
     }
 
     @ParameterizedTest(name = "{index} => launchID={0}, expectedStatus={1}")
@@ -78,22 +78,22 @@ public class LaunchInfoTests extends AbstractJUnit
 
     private static Stream<Arguments> getLaunches()
     {
-        return Stream.of(Arguments.of(6262801, "FAILED"), Arguments.of(6262802, "FAILED"),
-                Arguments.of(6262803, "FAILED"), Arguments.of(6262804, "FAILED"), Arguments.of(6262805, "PASSED"));
+        return Stream.of(Arguments.of(8931843, "FAILED"), Arguments.of(8931844, "FAILED"),
+                Arguments.of(8931845, "FAILED"), Arguments.of(8931846, "FAILED"), Arguments.of(8931847, "PASSED"));
     }
 
     private static Stream<Arguments> attributes()
     {
-        return Stream.of(Arguments.of(6262801,
+        return Stream.of(Arguments.of(8931843,
                         List.of(new Attribute(ATTRIBUTE_PREFIX + CommonUtils.getRandomInteger(MAX_INDEX),
                                 ATTRIBUTE_VALUE))),
-                Arguments.of(6262802, List.of(new Attribute(ATTRIBUTE_PREFIX + CommonUtils.getRandomInteger(MAX_INDEX),
+                Arguments.of(8931844, List.of(new Attribute(ATTRIBUTE_PREFIX + CommonUtils.getRandomInteger(MAX_INDEX),
                                 ATTRIBUTE_VALUE),
                         new Attribute(ATTRIBUTE_PREFIX + CommonUtils.getRandomInteger(MAX_INDEX), ATTRIBUTE_VALUE))),
-                Arguments.of(6262803, List.of(new Attribute(ATTRIBUTE_PREFIX + CommonUtils.getRandomInteger(MAX_INDEX),
-                        ATTRIBUTE_VALUE))), Arguments.of(6262804,
+                Arguments.of(8931845, List.of(new Attribute(ATTRIBUTE_PREFIX + CommonUtils.getRandomInteger(MAX_INDEX),
+                        ATTRIBUTE_VALUE))), Arguments.of(8931846,
                         List.of(new Attribute(ATTRIBUTE_PREFIX + CommonUtils.getRandomInteger(MAX_INDEX),
-                                ATTRIBUTE_VALUE))), Arguments.of(6262805,
+                                ATTRIBUTE_VALUE))), Arguments.of(8931847,
                         List.of(new Attribute(ATTRIBUTE_PREFIX + CommonUtils.getRandomInteger(MAX_INDEX),
                                 ATTRIBUTE_VALUE))));
     }

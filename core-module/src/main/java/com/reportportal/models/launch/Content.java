@@ -15,9 +15,9 @@ public class Content
     private String uuid;
     private String name;
     private Integer number;
-    private Long startTime;
-    private Long endTime;
-    private Long lastModified;
+    private String startTime;
+    private String endTime;
+    private String lastModified;
     private String status;
     private Statistics statistics;
     private List<Attribute> attributes;

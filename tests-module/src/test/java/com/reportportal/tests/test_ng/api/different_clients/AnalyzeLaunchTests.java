@@ -74,7 +74,7 @@ public class AnalyzeLaunchTests extends AbstractTestNG {
     @Test
     @TmsId(20607)
     public void compareLaunches() {
-        CustomResponse response = httpClient.compareLaunch(token, projectName, List.of(6262801, 6262802));
+        CustomResponse response = httpClient.compareLaunch(token, projectName, List.of(8931843, 8931844));
         Assertions.assertThat(response.getStatusCode())
                 .isEqualTo(200)
                 .as("Status code is correct");

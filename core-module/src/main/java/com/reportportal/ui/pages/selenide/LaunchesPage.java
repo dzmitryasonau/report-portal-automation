@@ -15,6 +15,8 @@ import com.reportportal.ui.core.SelenideActions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import lombok.Getter;
+
 @Component("selenideLaunchesPage")
 public class LaunchesPage extends AbstractSelenidePage
 {
@@ -29,7 +31,7 @@ public class LaunchesPage extends AbstractSelenidePage
     private final SelenideElement actionMenu = Selenide.$x("//i[contains(@class,'ghostMenuButton')]/..");
     private final SelenideElement compareLaunches = Selenide.$(Selectors.byText("Compare")).parent();
     private final SelenideElement compareLaunchesWindowHeader = Selenide.$(Selectors.byText("Compare launches"));
-    private final SelenideElement deleteWindowText = Selenide.$x("//p[contains(@class,'deleteItemsModal')" + "]");
+    private final SelenideElement deleteWindowText = Selenide.$x("//p[contains(@class,'deleteLaunchModal')]");
     private final SelenideElement deleteLaunch = Selenide.$x("//button[text()='Delete']");
     private final ElementsCollection startTimes = Selenide.$$x("//span[contains(@class,'absRelTime__absolute-time')]");
     private final ElementsCollection showFullLaunchStartTime = Selenide.$$x("//span[contains(@class,'absRelTime')]");
@@ -40,13 +42,9 @@ public class LaunchesPage extends AbstractSelenidePage
     private final ElementsCollection launchesNames = Selenide.$$x("//td//div[contains(@class,'itemInfo__name')]/span");
     @Autowired
     private SelenideActions selenideActions;
+    @Getter
     @Autowired
     private LaunchStatistics launchStatistics;
-
-    public LaunchStatistics getLaunchStatistics()
-    {
-        return launchStatistics;
-    }
 
     public LaunchesPage openHamburgerManu(String launchName)
     {
@@ -64,7 +62,7 @@ public class LaunchesPage extends AbstractSelenidePage
 
     public LaunchesPage deleteLaunch()
     {
-        selenideActions.click(deleteLaunch);
+        selenideActions.click(deleteLaunch).waitUntilInvisible(deleteLaunch);
         return this;
     }
 
@@ -143,7 +141,7 @@ public class LaunchesPage extends AbstractSelenidePage
 
     public LaunchesPage open(String projectName)
     {
-        Selenide.open("/ui/#" + projectName + "/launches/all");
+        Selenide.open("ui/#" + projectName + "/launches/all");
         return this;
     }
 }

@@ -1,14 +1,11 @@
 package com.reportportal.tests.test_ng.api.different_clients;
 
-import java.io.IOException;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.reportportal.annotations.TmsId;
 import com.reportportal.api.HttpClient;
 import com.reportportal.api.core.CustomResponse;
+import com.reportportal.api.steps.LaunchApiSteps;
 import com.reportportal.core.test_ng.AbstractTestNG;
 import com.reportportal.models.User;
 import com.reportportal.models.launch.Launch;
@@ -17,21 +14,27 @@ import com.reportportal.models.launch.api.StartLaunchRequest;
 import com.reportportal.service.AesCryptoService;
 import com.reportportal.service.UserDataService;
 import com.reportportal.utils.CommonUtils;
-
+import org.assertj.core.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class DeleteLaunchTests extends AbstractTestNG
 {
-    private static final String LAUNCH_NAME = "Demo Api Tests";
-    private static final Integer LAST_LAUNCH_ID = 6262805;
+    private static final String LAUNCH_NAME = "Created_Api_Tests";
     @Autowired
     private UserDataService userDataService;
     @Autowired
     private AesCryptoService aesCryptoService;
+    @Autowired
+    private LaunchApiSteps launchApiSteps;
     @Value("${rp.project}")
     private String projectName;
     @Autowired
@@ -51,6 +54,7 @@ public class DeleteLaunchTests extends AbstractTestNG
     }
 
     @Test
+    @TmsId(20611)
     public void checkLaunchDeletion()
     {
         finishLaunch();
@@ -58,10 +62,13 @@ public class DeleteLaunchTests extends AbstractTestNG
         CustomResponse response = httpClient.deleteLaunch(token, projectName, launchId);
 
         String expectedMessage = String.format("Launch with ID = '%s' successfully deleted.", launchId);
-        verifyThat.actualIsContainExpected(expectedMessage, response.getBody(), "Deletion message is correct, ");
+        Assertions.assertThat(response.getBody())
+                .contains(expectedMessage)
+                .as("Deletion message is correct");
     }
 
     @Test
+    @TmsId(20612)
     public void checkRunningLaunchDeletion()
     {
         String launchId = launch.getContent().get(0).getId().toString();
@@ -71,7 +78,11 @@ public class DeleteLaunchTests extends AbstractTestNG
         String expectedMessage = String.format(
                 "Unable to perform operation for non-finished launch. Unable to delete launch '%s' in progress state",
                 launchId);
-        verifyThat.actualIsContainExpected(expectedMessage, response.getBody(), "Deletion message is correct, ");
+        Assertions.assertThat(response.getBody())
+                .contains(expectedMessage)
+                .as("Deletion message is correct");
+
+        launchApiSteps.deleteLaunchWithFinish(token, projectName, launch);
     }
 
     private void createLaunch()

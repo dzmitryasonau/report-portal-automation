@@ -49,8 +49,8 @@ public class LaunchTests extends AbstractWebJUnit
 
     private static Stream<Arguments> getSuites()
     {
-        return Stream.of(Arguments.of(6262801), Arguments.of(6262802), Arguments.of(6262805), Arguments.of(6262804),
-                Arguments.of(6262805));
+        return Stream.of(Arguments.of(8931843), Arguments.of(8931844), Arguments.of(8931845), Arguments.of(8931846),
+                Arguments.of(8931847));
     }
 
     @AfterEach

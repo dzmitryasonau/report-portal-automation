@@ -18,7 +18,7 @@ public abstract class AbstractDriverStrategy
         this.webConfiguration = webConfiguration;
     }
 
-    protected abstract WebDriver getLocalDriverInstance();
+    protected abstract WebDriver getLocalDriverInstance(Boolean headless);
 
     protected abstract DriverManagerType getDriverManagerType();
 
@@ -32,6 +32,6 @@ public abstract class AbstractDriverStrategy
             instance = instance.browserVersion(browserVersion);
         }
         instance.setup();
-        return getLocalDriverInstance();
+        return getLocalDriverInstance(Boolean.parseBoolean(webConfiguration.getHeadless()));
     }
 }

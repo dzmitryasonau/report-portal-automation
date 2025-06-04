@@ -65,8 +65,8 @@ public class CheckLaunchCountDataTests extends AbstractSelenideWebTestNG
     @DataProvider(name = "launchesData")
     private static Object[][] getLaunchesData()
     {
-        return new Object[][] { { new LaunchStatisticsCard(6262801, 10, 1, 9, 0, 0, 1, 8, 5) },
-                { new LaunchStatisticsCard(6262802, 15, 5, 9, 1, 1, 5, 4, 8) } };
+        return new Object[][] { { new LaunchStatisticsCard(8931843, 10, 1, 9, 0, 0, 1, 8, 5) },
+                { new LaunchStatisticsCard(8931844, 15, 5, 9, 1, 1, 5, 4, 8) } };
     }
 
     @AfterMethod

@@ -40,3 +40,4 @@ replay_pid*
 
 #local-libs
 !libs/ms-teams-incoming-webhook-1.1.1.jar
+.teamcity

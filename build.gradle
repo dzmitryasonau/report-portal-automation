@@ -45,7 +45,7 @@ allprojects {
         javaxVer = "2.0.1.Final"
         modelMapperVer = "3.2.0"
         apachcePoi = "5.2.4"
-        cucumberVer = "7.14.0"
+        cucumberVer = "7.15.0"
         cucumberSpringVer = "7.14.0"
         surefirePlugin = "3.2.3"
         selenideVersion = "7.0.3"

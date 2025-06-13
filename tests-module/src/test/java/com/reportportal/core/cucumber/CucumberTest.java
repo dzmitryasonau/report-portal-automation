@@ -25,11 +25,8 @@ import io.cucumber.testng.CucumberOptions;
 @CucumberContextConfiguration
 @CucumberOptions(features = "src/test/resources/features",
         glue = "com.reportportal",
-        plugin = {
-                "pretty",
-                "com.epam.reportportal.cucumber.ScenarioReporter"
-        }
-)
+        plugin = { "pretty", "com.epam.reportportal.cucumber.ScenarioReporter" },
+        tags = "@ui and @cucumber_smoke")
 public class CucumberTest extends AbstractTestNGCucumberTests
 {
     @Autowired
@@ -85,7 +82,7 @@ public class CucumberTest extends AbstractTestNGCucumberTests
         {
             userDataService.releaseUser((User) globalVariablesService.getVariable("user"));
         }
-        reportService.info("Execution of scenario with name: %s, ended with status: %s",
-                scenario.getName(), scenario.getStatus());
+        reportService.info("Execution of scenario with name: %s, ended with status: %s", scenario.getName(),
+                scenario.getStatus());
     }
 }

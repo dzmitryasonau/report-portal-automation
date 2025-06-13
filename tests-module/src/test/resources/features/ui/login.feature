@@ -1,4 +1,4 @@
-@smoke @ui
+@ui @cucumber_smoke
 Feature: Login to UI
 
   Rule: Users can login with valid credentials

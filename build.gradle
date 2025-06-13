@@ -180,6 +180,22 @@ project(':tests-module') {
         systemProperty 'rp.attributes', 'tag:smoke'
     }
 
+    tasks.register('cucumber_smoke', Test) {
+        group = 'verification'
+        description = 'Runs UI cucumber smoke'
+
+        filter { includeTestsMatching '*CucumberTest' }
+
+        useTestNG {
+            includeGroups 'cucumber'
+            listeners << 'com.epam.reportportal.testng.ReportPortalTestNGListener'
+        }
+
+        addRpProps(delegate)
+        systemProperty 'rp.launch',
+                "Cucumber smoke ${new Date().format('yyyy-MM-dd_HH-mm')}"
+    }
+
     tasks.register('regression', Test) {
         group       = 'verification'
         description = 'Runs TestNG group "regression" with ReportPortal'

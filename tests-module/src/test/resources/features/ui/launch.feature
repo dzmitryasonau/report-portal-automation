@@ -1,4 +1,4 @@
-@ui
+@regression @ui
 Feature: Viewing test launches
 
   Background:

@@ -2,6 +2,7 @@ package com.reportportal.tests.test_ng.ui.selenium;
 
 import com.reportportal.annotations.TmsId;
 import com.reportportal.core.test_ng.AbstractWebTestNG;
+import com.reportportal.meta.TestGroup;
 import com.reportportal.models.User;
 import com.reportportal.service.UserDataService;
 import com.reportportal.ui.pages.LaunchesPage;
@@ -28,7 +29,7 @@ public class LoginTests extends AbstractWebTestNG
         user = null;
     }
 
-    @Test
+    @Test(groups = TestGroup.SMOKE)
     @TmsId(20549)
     public void loginToUI() {
         user = userDataService.getUser();
@@ -38,7 +39,7 @@ public class LoginTests extends AbstractWebTestNG
                 .as("User name is correct");
     }
 
-    @Test
+    @Test(groups = TestGroup.SMOKE)
     @TmsId(20605)
     public void failedLoginToUI() {
         user = userDataService.getUser();

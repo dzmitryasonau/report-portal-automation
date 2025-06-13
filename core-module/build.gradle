@@ -1,3 +1,13 @@
+import java.nio.charset.StandardCharsets
+
+StandardCharsets
+
+tasks.named('bootJar') {
+    enabled = false
+}
+tasks.named('jar') {
+    enabled = true
+}
 dependencies {
     implementation "com.google.code.gson:gson:${gsonVer}"
     implementation "org.assertj:assertj-core:${assertjVer}"

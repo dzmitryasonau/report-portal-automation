@@ -2,6 +2,7 @@ package com.reportportal.tests.test_ng.ui.selenium;
 
 import com.reportportal.annotations.TmsId;
 import com.reportportal.core.test_ng.AbstractWebTestNG;
+import com.reportportal.meta.TestGroup;
 import com.reportportal.models.User;
 import com.reportportal.service.SuitesDataReaderService;
 import com.reportportal.service.TestNGDataProvider;
@@ -34,7 +35,7 @@ public class LaunchTests extends AbstractWebTestNG
         user = userDataService.getUser();
     }
 
-    @Test(dataProvider = "suites", dataProviderClass = TestNGDataProvider.class)
+    @Test(dataProvider = "suites", dataProviderClass = TestNGDataProvider.class, groups = TestGroup.REGRESSION)
     @TmsId(20550)
     public void checkLaunches(Integer launchID)
     {

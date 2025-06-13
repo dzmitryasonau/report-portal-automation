@@ -55,7 +55,7 @@ allprojects {
         restAssuredVer = "5.3.2"
         httpclient5Ver = "5.2.1"
         testRailApiJavaVer = "2.0.2"
-        jerseyVer = "1.19.4"
+        jerseyVer = "1.19.5-atlassian-17"
     }
 
     apply plugin: 'org.springframework.boot'

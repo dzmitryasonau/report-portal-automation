@@ -19,7 +19,7 @@ allprojects {
     ext {
         springBootVer = "3.2.1"
         springFoxVer = "3.0.0"
-        seleniumVer = "4.16.1"
+        seleniumVer = "4.33.0"
         seleniumHttpJdkVer = "4.13.0"
         sauceRestVer = "2.0.2"
         webdriverManagerVer = "5.6.1"

@@ -1,0 +1,41 @@
+name: Delete old feature branches
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write 
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Delete old feature branches
+        run: |
+          DAYS_THRESHOLD=1
+
+          git fetch --prune origin
+
+          DEFAULT_BRANCH=$(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)
+
+          echo "Default branch is: $DEFAULT_BRANCH"
+
+          for branch in $(git branch -r | grep 'origin/feature/' | sed 's|origin/||'); do
+              echo "Checking branch: $branch"
+              last_commit_date=$(git log -1 --format="%ct" origin/$branch)      
+              current_date=$(date +%s)              
+              let diff_days=(current_date-last_commit_date)/86400                            
+              if [ "$diff_days" -gt "$DAYS_THRESHOLD" ]; then
+                  echo "Deleting branch $branch"
+                  git push origin --delete "$branch"
+              else
+                  echo "Branch $branch is fresh. Skipping."
+              fi
+          done

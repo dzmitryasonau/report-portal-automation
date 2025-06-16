@@ -23,10 +23,11 @@ import io.cucumber.testng.CucumberOptions;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 @ContextConfiguration(classes = { SpringDomainConfig.class })
 @CucumberContextConfiguration
-@CucumberOptions(features = "src/test/resources/features",
-        glue = "com.reportportal",
-        plugin = { "pretty", "com.epam.reportportal.cucumber.ScenarioReporter" },
-        tags = "@ui and @cucumber_smoke")
+@CucumberOptions(
+        features = "tests-module/src/test/resources/features",
+        plugin = {"pretty", "com.epam.reportportal.cucumber.ScenarioReporter"},
+        glue = { "com.reportportal"}
+)
 public class CucumberTest extends AbstractTestNGCucumberTests
 {
     @Autowired

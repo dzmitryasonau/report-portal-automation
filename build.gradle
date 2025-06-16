@@ -1,18 +1,10 @@
 import java.nio.charset.StandardCharsets
 
 plugins {
-    id 'org.springframework.boot'            version '3.2.0'
-    id 'io.spring.dependency-management'     version '1.1.7'
-    id 'org.sonarqube'                       version '4.4.1.3373'
+    id 'org.springframework.boot' version '3.2.0'
+    id 'io.spring.dependency-management' version '1.1.7'
     id 'checkstyle'
     id 'java'
-}
-
-sonarqube {
-    properties {
-        property "sonar.java.libraries",
-                configurations.runtimeClasspath.join(File.pathSeparator)
-    }
 }
 
 allprojects {
@@ -71,13 +63,13 @@ allprojects {
     }
 
     checkstyle {
-        toolVersion     = '10.9.1'
-        configFile      = rootProject.file('checkstyle/checkstyle.xml')
-        showViolations  = true
-        ignoreFailures  = false
+        toolVersion = '10.9.1'
+        configFile = rootProject.file('checkstyle/checkstyle.xml')
+        showViolations = true
+        ignoreFailures = false
     }
 
-    group   = 'com.reportportal'
+    group = 'com.reportportal'
     version = '1.0-SNAPSHOT'
     java {
         sourceCompatibility = JavaVersion.VERSION_21
@@ -112,6 +104,7 @@ allprojects {
         implementation "io.cucumber:cucumber-spring:${cucumberSpringVer}"
         compileOnly "org.projectlombok:lombok:${lombokVer}"
         compileOnly "org.apache.maven.plugins:maven-surefire-plugin:${surefirePlugin}"
+        implementation "com.epam.reportportal:agent-java-cucumber6:${reportportalLogBackVer}"
         annotationProcessor "org.projectlombok:lombok:${lombokVer}"
         testCompileOnly "org.projectlombok:lombok:${lombokVer}"
         testImplementation "com.epam.reportportal:logger-java-selenide:${reportPortalLoggerVer}"
@@ -120,7 +113,7 @@ allprojects {
         implementation "io.rest-assured:rest-assured:${restAssuredVer}"
         implementation "io.rest-assured:xml-path:${restAssuredVer}"
         implementation "org.apache.httpcomponents.client5:httpclient5:${httpclient5Ver}"
-        testImplementation  "org.assertj:assertj-core:${assertjVer}"
+        testImplementation "org.assertj:assertj-core:${assertjVer}"
         testImplementation "ru.yandex.qatools.ashot:ashot:${ashotVer}"
         implementation "com.codepine.api:testrail-api-java-client:${testRailApiJavaVer}"
         implementation 'ms-teams-incoming-webhook:ms-teams-incoming-webhook:1.1.1'
@@ -130,81 +123,52 @@ allprojects {
 
 }
 
-    tasks.withType(JavaCompile).configureEach {
-        options.encoding = StandardCharsets.UTF_8.name()
-        options.release.set(21)
-    }
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = StandardCharsets.UTF_8.name()
+    options.release.set(21)
+}
 
-    jar     { enabled = true  }
-    bootJar { enabled = false }
+jar { enabled = true }
+bootJar { enabled = false }
 
 project(':tests-module') {
 
     def addRpProps = { Test t ->
-        t.systemProperty 'rp.enable',   'true'
-        t.systemProperty 'rp.launch',   System.getProperty('rp.launch',
+        t.systemProperty 'rp.enable', 'true'
+        t.systemProperty 'rp.launch', System.getProperty('rp.launch',
                 "Local run ${new Date().format('yyyy-MM-dd_HH-mm')}")
-
+        t.systemProperty 'rp.api.key', ''
         t.systemProperty 'rp.attributes',
                 System.getProperty('rp.attributes', 'env:local')
     }
 
-    tasks.named('test', Test).configure {
-        systemProperties System.getProperties()
-        maxHeapSize = '1G'
-
-        useTestNG {
-            options {
-                setParallel("classes")
-                setThreadCount(2)
-            }
-
-            listeners << 'com.epam.reportportal.testng.ReportPortalTestNGListener'
-
-            if (project.hasProperty('groups')) {
-                includeGroups project.groups
-            }
-        }
-        addRpProps(delegate)
-    }
-
-    tasks.register('smoke', Test) {
-        group       = 'verification'
-        description = 'Runs TestNG group "smoke" with ReportPortal'
-        useTestNG {
-            includeGroups 'smoke'
-            listeners << 'com.epam.reportportal.testng.ReportPortalTestNGListener'
-        }
-        addRpProps(delegate)
-        systemProperty 'rp.launch', "Smoke ${new Date().format('yyyy-MM-dd_HH-mm')}"
-        systemProperty 'rp.attributes', 'tag:smoke'
-    }
-
-    tasks.register('cucumber_smoke', Test) {
+    tasks.register('testNG', Test) {
         group = 'verification'
-        description = 'Runs UI cucumber smoke'
-
-        filter { includeTestsMatching '*CucumberTest' }
+        description = 'Runs TestNG with provided groups and ReportPortal'
 
         useTestNG {
-            includeGroups 'cucumber'
+            def groupsToInclude = project.findProperty('groups') ?: ''
+            if (groupsToInclude) {
+                includeGroups groupsToInclude.split(',')
+            }
             listeners << 'com.epam.reportportal.testng.ReportPortalTestNGListener'
         }
 
         addRpProps(delegate)
-        systemProperty 'rp.launch',
-                "Cucumber smoke ${new Date().format('yyyy-MM-dd_HH-mm')}"
+        def launchType = project.findProperty('launchType') ?: 'Custom'
+        systemProperty 'rp.launch', "${launchType} ${new Date().format('yyyy-MM-dd_HH-mm')}"
+        systemProperty 'rp.attributes', "tag:${launchType.toLowerCase()}"
     }
 
-    tasks.register('regression', Test) {
-        group       = 'verification'
-        description = 'Runs TestNG group "regression" with ReportPortal'
-        useTestNG {
-            includeGroups 'regression'
+    tasks.register('cucumber', Test) {
+        description = 'Runs UI cucumber smoke'
+        useTestNG() {
+            suiteXmlFiles = files('src/test/resources/testng.xml') as List<File>
             listeners << 'com.epam.reportportal.testng.ReportPortalTestNGListener'
         }
         addRpProps(delegate)
-        systemProperty 'rp.launch', "Regression ${new Date().format('yyyy-MM-dd_HH-mm')}"
-        systemProperty 'rp.attributes', 'tag:regression'
+        systemProperty 'rp.launch', "Cucumber ${new Date().format('yyyy-MM-dd_HH-mm')}"
+        systemProperty 'rp.attributes', 'tag:cucumber'
+        systemProperties System.getProperties()
     }
 }

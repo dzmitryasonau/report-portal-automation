@@ -1,4 +1,4 @@
-package com.reportportal.step_defenitions.ui;
+package com.reportportal.step_definitions.ui;
 
 import java.util.Collection;
 import java.util.Collections;

@@ -1,9 +1,9 @@
-@smoke @ui
+@ui
 Feature: Login to UI
 
   Rule: Users can login with valid credentials
 
-    @used_UI_login
+    @smoke @used_UI_login
     Example: User with project manager role logins to UI
 
       Given I am logged in as "AsDmitrij"

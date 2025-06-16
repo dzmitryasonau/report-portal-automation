@@ -1,4 +1,4 @@
-package com.reportportal.step_defenitions.ui;
+package com.reportportal.step_definitions.ui;
 
 import com.reportportal.asserts.VerifyThat;
 import com.reportportal.models.User;

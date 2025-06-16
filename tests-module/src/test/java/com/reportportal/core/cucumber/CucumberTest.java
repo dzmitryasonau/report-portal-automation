@@ -23,12 +23,10 @@ import io.cucumber.testng.CucumberOptions;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 @ContextConfiguration(classes = { SpringDomainConfig.class })
 @CucumberContextConfiguration
-@CucumberOptions(features = "src/test/resources/features",
-        glue = "com.reportportal",
-        plugin = {
-                "pretty",
-                "com.epam.reportportal.cucumber.ScenarioReporter"
-        }
+@CucumberOptions(
+        features = "tests-module/src/test/resources/features",
+        plugin = {"pretty", "com.epam.reportportal.cucumber.ScenarioReporter"},
+        glue = { "com.reportportal"}
 )
 public class CucumberTest extends AbstractTestNGCucumberTests
 {
@@ -85,7 +83,7 @@ public class CucumberTest extends AbstractTestNGCucumberTests
         {
             userDataService.releaseUser((User) globalVariablesService.getVariable("user"));
         }
-        reportService.info("Execution of scenario with name: %s, ended with status: %s",
-                scenario.getName(), scenario.getStatus());
+        reportService.info("Execution of scenario with name: %s, ended with status: %s", scenario.getName(),
+                scenario.getStatus());
     }
 }

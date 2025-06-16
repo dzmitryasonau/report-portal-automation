@@ -1,4 +1,4 @@
-package com.reportportal.step_defenitions.api;
+package com.reportportal.step_definitions.api;
 
 import java.util.Collection;
 import java.util.HashMap;

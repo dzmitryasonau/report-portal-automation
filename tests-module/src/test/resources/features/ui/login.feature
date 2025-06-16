@@ -1,4 +1,4 @@
-@ui
+@smoke @ui
 Feature: Login to UI
 
   Rule: Users can login with valid credentials

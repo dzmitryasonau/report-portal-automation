@@ -139,6 +139,7 @@ project(':tests-module') {
                 "Local run ${new Date().format('yyyy-MM-dd_HH-mm')}")
         t.systemProperty 'rp.api.key', System.getProperty('rp.api.key', '')
         t.systemProperty 'rp.attributes', System.getProperty('rp.attributes', 'env:local')
+        t.systemProperty 'aes.key', System.getProperty('aes.key', '')
     }
 
     tasks.register('testNG', Test) {

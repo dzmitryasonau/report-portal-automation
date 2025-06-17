@@ -3,7 +3,7 @@ Feature: Login to UI
 
   Rule: Users can login with valid credentials
 
-    @smoke @used_UI_login
+    @new_cucumber_0617 @used_UI_login
     Example: User with project manager role logins to UI
 
       Given I am logged in as "AsDmitrij"

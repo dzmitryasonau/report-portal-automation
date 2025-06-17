@@ -43,4 +43,4 @@ jobs:
 
       - name: Run cucumber tests with the extracted dynamic tag
         if: steps.find_tag.outputs.tag_found == 'true'
-        run: ./gradlew :tests-module:cucumber -Dcucumber.filter.tags=${{ steps.find_tag.outputs.CUCUMBER_TAG }} -Drp.api.key=${{ secrets.YOUR_API_KEY }} -Drp.api.key=${{ secrets.AES_KEY }}
+        run: ./gradlew :tests-module:cucumber -Dcucumber.filter.tags=${{ steps.find_tag.outputs.CUCUMBER_TAG }} -Drp.api.key=${{ secrets.YOUR_API_KEY }} -Daes.key=${{ secrets.AES_KEY }}

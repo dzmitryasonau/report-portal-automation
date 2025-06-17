@@ -1,0 +1,46 @@
+name: Run new cucumber tests by dynamic @new_cucumber_* tags on new PR
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+    paths:
+      - '**/*.feature'
+
+jobs:
+  run_new_dynamic_cucumber_tag:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Setup Chrome browser
+        uses: browser-actions/setup-chrome@latest
+
+      - name: Find dynamic new_cucumber tag in modified feature files
+        id: find_tag
+        run: |
+          TAG=$(git diff --diff-filter=AM --name-only origin/${{ github.base_ref }}..HEAD \
+              | grep "\.feature$" \
+              | xargs grep -o "@new_cucumber_[A-Za-z0-9]*" \
+              | head -n 1)
+          if [ -z "$TAG" ]; then
+            echo "No dynamic cucumber tag found."
+            echo "tag_found=false" >> $GITHUB_OUTPUT
+          else
+            echo "Found cucumber tag: $TAG"
+            echo "CUCUMBER_TAG=$TAG" >> $GITHUB_OUTPUT
+            echo "tag_found=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run cucumber tests with the extracted dynamic tag
+        if: steps.find_tag.outputs.tag_found == 'true'
+        run: ./gradlew :tests-module:cucumber -Dcucumber.filter.tags=${{ steps.find_tag.outputs.CUCUMBER_TAG }} -Drp.api.key=${{ secrets.YOUR_API_KEY }}

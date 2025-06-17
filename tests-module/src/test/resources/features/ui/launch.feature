@@ -6,7 +6,7 @@ Feature: Viewing test launches
     And a project with name "dzmitry_asonau_personal"
     When I login in app
 
-  @used_UI_login
+  @new_cucumber_0617 @used_UI_login
   Scenario: User check suites for launch with id 8931843
     When I open launches page
     And I open launch by it's id 8931843
